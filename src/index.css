@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 :root {
-  --primary-colour: ##f5f5f5;
+  --primary-colour: #f5f5f5;
   --secondary-colour: #37474f;
   --tertiary-colour: #6ca0dc;
   --accent-colour: #c0d960;
