@@ -2,7 +2,16 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        primary: ["Nunito", "sans-serif"],
+        secondary: ["Merriweather", "serif"],
+      },
+      colors: {
+        backgroundColour: "var(--primary-colour)",
+        textColour: "var(--secondary-colour)",
+      },
+    },
   },
   plugins: [],
 };
