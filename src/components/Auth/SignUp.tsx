@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const handleLogin = () => {};
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    navigate(`/dashbaord`);
+  };
   return (
     <section
       className="h-screen flex flex-col items-center justify-center"
       style={{
-        backgroundImage: `url(login.jpg)`,
+        backgroundImage: `url(signup.jpg)`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
@@ -14,7 +18,7 @@ const SignUp = () => {
       <section className="h-[60%] bg-backgroundColour w-full max-w-[650px] flex flex-col items-center justify-center">
         <h1 className="text-5xl border-2 border-black mb-8">BookScape</h1>
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSignUp}
           className="flex flex-col border-2 border-black w-[80%]"
         >
           <label className="my-2" htmlFor="email">

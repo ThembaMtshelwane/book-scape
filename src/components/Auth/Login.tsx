@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const handleLogin = () => {};
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate(`/dashbaord`);
+  };
   return (
     <section
       className="h-screen flex flex-col items-center justify-center"
