@@ -21,3 +21,12 @@ h1,
 h2 {
   font-family: "Merriweather", "serif";
 }
+
+@layer components {
+  .auth-container {
+    @apply h-[60%] bg-backgroundColour w-full  max-w-[550px] flex flex-col items-center justify-center;
+  }
+  .auth-form {
+    @apply flex flex-col border-2 border-black w-[80%];
+  }
+}

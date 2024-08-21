@@ -15,12 +15,9 @@ const SignUp = () => {
         backgroundSize: "cover",
       }}
     >
-      <section className="h-[60%] bg-backgroundColour w-full max-w-[650px] flex flex-col items-center justify-center">
+      <section className="auth-container ">
         <h1 className="text-5xl border-2 border-black mb-8">BookScape</h1>
-        <form
-          onSubmit={handleSignUp}
-          className="flex flex-col border-2 border-black w-[80%]"
-        >
+        <form onSubmit={handleSignUp} className="auth-form">
           <label className="my-2" htmlFor="email">
             Email
           </label>
