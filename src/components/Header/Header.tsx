@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import Search from "./Search";
+import Search from "./Search/Search";
 
 const Header = () => {
   return (

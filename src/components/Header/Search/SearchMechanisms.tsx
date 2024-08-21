@@ -1,67 +1,7 @@
 import { useState } from "react";
 import { CiFilter } from "react-icons/ci";
-import { IoClose, IoSearch } from "react-icons/io5";
-
-type Book = {
-  id: string;
-  title: string;
-  authors: string[];
-  description: string;
-};
-
-const Search = () => {
-  const [searchedItem, setSearchedItem] = useState<string>("");
-  const [searchOptions, setSearchOptions] = useState<Book[]>([]);
-
-  const editedSearchOptionsResults: Book[] = searchOptions
-    .filter((item: Book) =>
-      item.title.toLowerCase().includes(searchedItem.toLowerCase())
-    )
-    .slice(0, 5);
-
-  return (
-    <section>
-      <SearchMechanisms
-        searchedItem={searchedItem}
-        setSearchedItem={setSearchedItem}
-        setSearchOptions={setSearchOptions}
-      />
-      <section>
-        {searchedItem && (
-          <ShowSearchOptions
-            searchOptions={editedSearchOptionsResults}
-            setSearchedItem={setSearchedItem}
-          />
-        )}
-      </section>
-    </section>
-  );
-};
-
-export default Search;
-
-interface ShowSearchOptionsProps {
-  searchOptions: Book[];
-  setSearchedItem: (item: string) => void;
-}
-const ShowSearchOptions = ({
-  searchOptions,
-  setSearchedItem,
-}: ShowSearchOptionsProps) => {
-  return (
-    <section>
-      {searchOptions.map((item: Book) => (
-        <div
-          key={item.id}
-          onClick={() => setSearchedItem(item.title)}
-          className="m-2 border-2 border-black"
-        >
-          {item.title} - {item.authors.join(", ")}
-        </div>
-      ))}
-    </section>
-  );
-};
+import { IoSearch, IoClose } from "react-icons/io5";
+import { Book } from "../../../definitions";
 
 interface SearchMechanismsProps {
   searchedItem: string;
@@ -69,7 +9,7 @@ interface SearchMechanismsProps {
   setSearchOptions: (books: Book[]) => void;
 }
 
-const SearchMechanisms = ({
+export const SearchMechanisms = ({
   searchedItem,
   setSearchedItem,
   setSearchOptions,
