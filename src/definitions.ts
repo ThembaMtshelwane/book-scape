@@ -3,4 +3,5 @@ export type Book = {
   title: string;
   authors: string[];
   description: string;
+  imageUrl: string;
 };

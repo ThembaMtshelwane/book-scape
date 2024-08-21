@@ -26,6 +26,7 @@ export const SearchMechanisms = ({
       title: e.target.value,
       authors: [],
       description: "",
+      imageUrl: "",
     });
     if (e.target.value.trim() === "") {
       setSearchOptions([]);
@@ -44,6 +45,7 @@ export const SearchMechanisms = ({
         title: item.volumeInfo.title,
         authors: item.volumeInfo.authors || [],
         description: item.volumeInfo.description || "",
+        imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
       }));
 
       setSearchOptions(books);
