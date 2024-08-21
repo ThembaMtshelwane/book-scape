@@ -20,6 +20,9 @@ function App() {
         <Route path="/dashbaord" element={<MainLayout />}>
           <Route path="/dashbaord/" element={<>Dashboard</>} />
         </Route>
+        <Route path="/books/" element={<MainLayout />}>
+          <Route path="/books/:id" element={<>Book</>} />
+        </Route>
       </Route>
     )
   ); //

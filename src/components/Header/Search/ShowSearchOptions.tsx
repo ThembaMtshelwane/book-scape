@@ -2,7 +2,7 @@ import { Book } from "../../../definitions";
 
 interface ShowSearchOptionsProps {
   searchOptions: Book[];
-  setSearchedItem: (item: string) => void;
+  setSearchedItem: (item: Book) => void;
 }
 export const ShowSearchOptions = ({
   searchOptions,
@@ -13,7 +13,7 @@ export const ShowSearchOptions = ({
       {searchOptions.map((item: Book) => (
         <div
           key={item.id}
-          onClick={() => setSearchedItem(item.title)}
+          onClick={() => setSearchedItem(item)}
           className="m-2 border-2 border-black"
         >
           {item.title} - {item.authors.join(", ")}

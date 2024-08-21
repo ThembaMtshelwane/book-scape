@@ -2,10 +2,11 @@ import { useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { Book } from "../../../definitions";
+import { useNavigate } from "react-router-dom";
 
 interface SearchMechanismsProps {
-  searchedItem: string;
-  setSearchedItem: (item: string) => void;
+  searchedItem: Book;
+  setSearchedItem: (books: Book) => void;
   setSearchOptions: (books: Book[]) => void;
 }
 
@@ -15,11 +16,17 @@ export const SearchMechanisms = ({
   setSearchOptions,
 }: SearchMechanismsProps) => {
   const [filterToggle, setFilterToggle] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const handleSearchOptions = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSearchedItem(e.target.value);
+    setSearchedItem({
+      id: "",
+      title: e.target.value,
+      authors: [],
+      description: "",
+    });
     if (e.target.value.trim() === "") {
       setSearchOptions([]);
       return;
@@ -47,13 +54,15 @@ export const SearchMechanisms = ({
 
   const handleSearchItem = (e: React.FormEvent) => {
     e.preventDefault();
+    setSearchOptions([]);
+    navigate(`/books/${searchedItem.id}`);
   };
   return (
     <form onSubmit={handleSearchItem}>
       <section>
         <input
           type="text"
-          value={searchedItem}
+          value={searchedItem.title}
           name="searchedItem"
           placeholder="Search for books"
           onChange={handleSearchOptions}
@@ -63,7 +72,7 @@ export const SearchMechanisms = ({
         </button>
       </section>
       <section>
-        {filterToggle ? (
+        {/* {filterToggle ? (
           <CiFilter
             onClick={() => setFilterToggle((prevState) => !prevState)}
           />
@@ -89,7 +98,7 @@ export const SearchMechanisms = ({
               </li>
             </ul>
           </section>
-        )}
+        )} */}
       </section>
     </form>
   );

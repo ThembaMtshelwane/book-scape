@@ -4,12 +4,17 @@ import { SearchMechanisms } from "./SearchMechanisms";
 import { ShowSearchOptions } from "./ShowSearchOptions";
 
 const Search = () => {
-  const [searchedItem, setSearchedItem] = useState<string>("");
+  const [searchedItem, setSearchedItem] = useState<Book>({
+    id: "",
+    title: "",
+    authors: [],
+    description: "",
+  });
   const [searchOptions, setSearchOptions] = useState<Book[]>([]);
 
   const editedSearchOptionsResults: Book[] = searchOptions
     .filter((item: Book) =>
-      item.title.toLowerCase().includes(searchedItem.toLowerCase())
+      item.title.toLowerCase().includes(searchedItem.title.toLowerCase())
     )
     .slice(0, 5);
 
