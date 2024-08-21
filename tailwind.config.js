@@ -10,6 +10,8 @@ export default {
       colors: {
         backgroundColour: "var(--primary-colour)",
         textColour: "var(--secondary-colour)",
+        blueGray: "var(--tertiary-colour)",
+        yellowGreen: "var(--accent-colour)",
       },
     },
   },

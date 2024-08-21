@@ -6,10 +6,10 @@
 @tailwind utilities;
 
 :root {
-  --primary-colour: #f5f5f5;
-  --secondary-colour: #37474f;
-  --tertiary-colour: #6ca0dc;
-  --accent-colour: #c0d960;
+  --primary-colour: #f5f5f5; /* white smoke*/
+  --secondary-colour: #37474f; /* charcaol*/
+  --tertiary-colour: #6ca0dc; /*blue gray */
+  --accent-colour: #c0d960; /* yellow green*/
 }
 
 p,
@@ -28,5 +28,8 @@ h2 {
   }
   .auth-form {
     @apply flex flex-col border-2 border-black w-[80%];
+  }
+  .nav-item {
+    @apply border-2 text-backgroundColour w-full flex justify-center m-2 hover:text-yellowGreen hover:scale-110  hover:border-yellowGreen;
   }
 }
