@@ -10,6 +10,8 @@ import SignUp from "./components/Auth/SignUp";
 import MainLayout from "./layouts/MainLayout";
 import Dashbaord from "./pages/Dashbaord";
 import LatestBooks from "./pages/LatestBooks";
+import { resultsLoader } from "./components/Header/Search/SearchMechanisms";
+import { SearchResults } from "./pages/SearchResults";
 
 function App() {
   const router = createBrowserRouter(
@@ -28,7 +30,8 @@ function App() {
         <Route path="/books/" element={<MainLayout />}>
           <Route
             path="/books/:searchItem/:geners/"
-            element={<>specific book</>}
+            element={<SearchResults />}
+            loader={resultsLoader}
           />
         </Route>
       </Route>

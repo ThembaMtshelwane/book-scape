@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { Book, genres } from "../../../definitions";
-import { useNavigate } from "react-router-dom";
+import { LoaderFunctionArgs, useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 
 interface SearchMechanismsProps {
@@ -11,7 +11,7 @@ interface SearchMechanismsProps {
   setSearchOptions: (books: Book[]) => void;
 }
 
-export const SearchMechanisms = ({
+const SearchMechanisms = ({
   searchedItem,
   setSearchedItem,
   setSearchOptions,
@@ -36,6 +36,10 @@ export const SearchMechanisms = ({
     }
 
     try {
+      // const genreQueries = selectedGenres
+      //   .map((genre) => `subject:${genre}`)
+      //   .join(" OR ");
+      // const query = `${e.target.value}${selectedGenres.length ? `+(${genreQueries})` : ""}`;
       // const res = await fetch(
       /*
         const genreQueries = selectedGenres.map(genre => `subject:${genre}`).join(" OR ");
@@ -83,13 +87,15 @@ export const SearchMechanisms = ({
     e.preventDefault();
     setSearchOptions([]);
     const formData = new FormData(e.currentTarget);
-    formData.append("genre", JSON.stringify(selectedGenres));
     const payload = Object.fromEntries(formData) as {
       [key: string]: FormDataEntryValue;
     };
     console.log("added payload", payload);
+    const genreQueries = selectedGenres
+      .map((genre) => `subject:${genre}`)
+      .join(" OR ");
 
-    navigate(`/books/${payload.searchString}/${selectedGenres.join("")}`);
+    navigate(`/books/${payload.searchString}/${genreQueries}`);
   };
 
   return (
@@ -138,3 +144,44 @@ export const SearchMechanisms = ({
     </form>
   );
 };
+
+const resultsLoader = async ({ params }: LoaderFunctionArgs) => {
+  try {
+    //   `https://www.googleapis.com/books/v1/volumes?q=${params.searchString}${params.geners}&key=${
+    //     import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
+    //   }`
+    // );
+    // const data = await res.json();
+
+    // const books = data.items.map((item: any) => ({
+    //   id: item.id,
+    //   title: item.volumeInfo.title,
+    //   authors: item.volumeInfo.authors || [],
+    //   description: item.volumeInfo.description || "",
+    //   imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
+    // }));
+
+    const response = await fetch(
+      `https://openlibrary.org/search.json?q=${params.searchString}`
+    );
+    const data = await response.json();
+
+    const books: Book[] = data.docs.map((item: any) => ({
+      id: item.key.split("/").pop() || "unknown",
+      title: item.title,
+      authors: item.author_name || [],
+      description: item.first_sentence
+        ? item.first_sentence.join(" ")
+        : "No description available",
+      imageUrl: item.cover_i
+        ? `https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`
+        : "",
+    }));
+
+    return books;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+export { SearchMechanisms as default, resultsLoader };

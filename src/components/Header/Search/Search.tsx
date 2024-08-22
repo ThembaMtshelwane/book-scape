@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Book } from "../../../definitions";
-import { SearchMechanisms } from "./SearchMechanisms";
+
 import { ShowSearchOptions } from "./ShowSearchOptions";
+import SearchMechanisms from "./SearchMechanisms";
 
 const Search = () => {
   const [searchedItem, setSearchedItem] = useState<Book>({
