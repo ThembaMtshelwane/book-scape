@@ -7,8 +7,9 @@ const Search = () => {
   const [searchedItem, setSearchedItem] = useState<Book>({
     id: "",
     title: "",
-    authors: [],
+    authors: "",
     description: "",
+    imageUrl: "",
   });
   const [searchOptions, setSearchOptions] = useState<Book[]>([]);
 

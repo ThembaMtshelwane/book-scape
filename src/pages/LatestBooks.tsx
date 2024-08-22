@@ -23,7 +23,7 @@ const LatestBooks = () => {
           </li>
         ))}
       </ul>
-      {/* <Books maxNumberOfBooks={maxNumberOfBooksLatest} /> */}
+      <Books maxNumberOfBooks={maxNumberOfBooksLatest} />
     </>
   );
 };

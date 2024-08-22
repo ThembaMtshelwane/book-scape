@@ -26,7 +26,10 @@ function App() {
           <Route path="/latest-books/:id" element={<LatestBooks />} />
         </Route>
         <Route path="/books/" element={<MainLayout />}>
-          <Route path="/books/:id" element={<>specific book</>} />
+          <Route
+            path="/books/:searchItem/:geners/"
+            element={<>specific book</>}
+          />
         </Route>
       </Route>
     )

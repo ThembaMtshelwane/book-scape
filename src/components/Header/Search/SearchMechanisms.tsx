@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { IoSearch, IoClose } from "react-icons/io5";
-import { Book } from "../../../definitions";
+import { Book, genres } from "../../../definitions";
 import { useNavigate } from "react-router-dom";
+import Multiselect from "multiselect-react-dropdown";
 
 interface SearchMechanismsProps {
   searchedItem: Book;
@@ -17,6 +18,7 @@ export const SearchMechanisms = ({
 }: SearchMechanismsProps) => {
   const [filterToggle, setFilterToggle] = useState<boolean>(true);
   const navigate = useNavigate();
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   const handleSearchOptions = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -32,9 +34,15 @@ export const SearchMechanisms = ({
       setSearchOptions([]);
       return;
     }
+
     try {
       // const res = await fetch(
-      //   `https://www.googleapis.com/books/v1/volumes?q=${e.target.value}&key=${
+      /*
+        const genreQueries = selectedGenres.map(genre => `subject:${genre}`).join(" OR ");
+        const query = `${e.target.value}${selectedGenres.length ? `+(${genreQueries})` : ""}`;
+       */
+
+      //   `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${
       //     import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
       //   }`
       // );
@@ -71,27 +79,36 @@ export const SearchMechanisms = ({
     }
   };
 
-  const handleSearchItem = (e: React.FormEvent) => {
+  const handleSearchItem = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchOptions([]);
-    navigate(`/books/${searchedItem.id}`);
+    const formData = new FormData(e.currentTarget);
+    formData.append("genre", JSON.stringify(selectedGenres));
+    const payload = Object.fromEntries(formData) as {
+      [key: string]: FormDataEntryValue;
+    };
+    console.log("added payload", payload);
+
+    navigate(`/books/${payload.searchString}/${selectedGenres.join("")}`);
   };
+
   return (
     <form onSubmit={handleSearchItem}>
       <section>
         <input
           type="text"
           value={searchedItem.title}
-          name="searchedItem"
+          name="searchString"
           placeholder="Search for books"
           onChange={handleSearchOptions}
+          required
         />
-        <button type="submit">
+        <button>
           <IoSearch />
         </button>
       </section>
       <section>
-        {/* {filterToggle ? (
+        {filterToggle ? (
           <CiFilter
             onClick={() => setFilterToggle((prevState) => !prevState)}
           />
@@ -102,22 +119,21 @@ export const SearchMechanisms = ({
                 onClick={() => setFilterToggle((prevState) => !prevState)}
               />
             </section>
-            <ul>
-              <li>
-                <label htmlFor="option1">Option 1</label>
-                <input type="radio" id="option1" name="filterOption" />
-              </li>
-              <li>
-                <label htmlFor="option2">Option 2</label>
-                <input type="radio" id="option2" name="filterOption" />
-              </li>
-              <li>
-                <label htmlFor="option3">Option 3</label>
-                <input type="radio" id="option3" name="filterOption" />
-              </li>
-            </ul>
+            <Multiselect
+              options={genres}
+              isObject={false}
+              onKeyPressFn={function noRefCheck() {}}
+              onRemove={function noRefCheck(selected) {
+                setSelectedGenres(selected);
+              }}
+              onSearch={function noRefCheck() {}}
+              onSelect={function noRefCheck(selected) {
+                setSelectedGenres(selected);
+              }}
+              selectedValues={selectedGenres}
+            />
           </section>
-        )} */}
+        )}
       </section>
     </form>
   );
