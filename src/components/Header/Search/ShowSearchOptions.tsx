@@ -16,7 +16,8 @@ export const ShowSearchOptions = ({
           onClick={() => setSearchedItem(item)}
           className="m-2 border-2 border-black"
         >
-          {item.title} - {item.authors.join(", ")}
+          {/* {item.title} - {item.authors.join(", ")} */}
+          {item.title} - {item.authors}
         </div>
       ))}
     </section>

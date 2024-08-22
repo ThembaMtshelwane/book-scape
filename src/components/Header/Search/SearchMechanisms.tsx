@@ -24,7 +24,7 @@ export const SearchMechanisms = ({
     setSearchedItem({
       id: "",
       title: e.target.value,
-      authors: [],
+      authors: "",
       description: "",
       imageUrl: "",
     });
@@ -33,19 +33,36 @@ export const SearchMechanisms = ({
       return;
     }
     try {
-      const res = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${e.target.value}&key=${
-          import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
-        }`
-      );
-      const data = await res.json();
+      // const res = await fetch(
+      //   `https://www.googleapis.com/books/v1/volumes?q=${e.target.value}&key=${
+      //     import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
+      //   }`
+      // );
+      // const data = await res.json();
 
-      const books = data.items.map((item: any) => ({
-        id: item.id,
-        title: item.volumeInfo.title,
-        authors: item.volumeInfo.authors || [],
-        description: item.volumeInfo.description || "",
-        imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
+      // const books = data.items.map((item: any) => ({
+      //   id: item.id,
+      //   title: item.volumeInfo.title,
+      //   authors: item.volumeInfo.authors || [],
+      //   description: item.volumeInfo.description || "",
+      //   imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
+      // }));
+
+      const response = await fetch(
+        `https://openlibrary.org/search.json?q=${e.target.value}`
+      );
+      const data = await response.json();
+
+      const books = data.docs.map((item: any) => ({
+        id: item.key.split("/").pop() || "unknown",
+        title: item.title,
+        authors: item.author_name || [],
+        description: item.first_sentence
+          ? item.first_sentence.join(" ")
+          : "No description available",
+        imageUrl: item.cover_i
+          ? `https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`
+          : "",
       }));
 
       setSearchOptions(books);
