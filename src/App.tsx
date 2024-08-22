@@ -19,7 +19,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
 
         <Route path="/dashbaord" element={<MainLayout />}>
-          <Route path="/dashbaord/" element={<Books type="new" />} />
+          <Route path="/dashbaord/" element={<Books type="" />} />
         </Route>
         <Route path="/books/" element={<MainLayout />}>
           <Route path="/books/:id" element={<>specific book</>} />

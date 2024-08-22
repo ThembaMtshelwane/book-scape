@@ -13,7 +13,7 @@ const Books = ({ type }: BooksProp) => {
     const fetchLatestBooks = async () => {
       try {
         const res = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${type}&orderBy=newest&key=${
+          `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=8&key=${
             import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
           }`
         );
@@ -36,7 +36,7 @@ const Books = ({ type }: BooksProp) => {
     fetchLatestBooks();
   }, []);
   return (
-    <section className="flex gap-5 flex-col items-center justify-center sm:flex-row border-2 border-black w-full min-h-screen flex-wrap max-w-[1350px] mx-auto">
+    <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full min-h-screen flex-wrap max-w-[1350px] mx-auto">
       {books.map((book: Book) => (
         <BookCard book={book} key={book.id} />
       ))}
@@ -63,7 +63,7 @@ const BookCard = ({ book }: BookCardProps) => {
     <Link to={`/books/${book.id}`} key={book.id}>
       <section
         key={book.id}
-        className="border-2 border-black w-[300px] h-[480px] flex flex-col items-center"
+        className="border-2 border-black w-[95%] mx-auto max-w-[400px] h-[480px] flex flex-col items-center sm:max-w-[320px]"
       >
         <section className="border-2 border-black flex justify-center h-[60%] w-full overflow-hidden">
           <img
