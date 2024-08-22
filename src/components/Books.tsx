@@ -1,31 +1,42 @@
 import { useEffect, useState } from "react";
 import { Book } from "../definitions";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-type BooksProp = {
-  numberOfItems: number;
+type BooksProps = {
+  maxNumberOfBooks: number;
 };
 
-const Books = ({ numberOfItems }: BooksProp) => {
+const Books = ({ maxNumberOfBooks }: BooksProps) => {
   const [books, setBooks] = useState<Book[]>([]);
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
+    const startIndex = id ? (Number(id) - 1) * maxNumberOfBooks : 0;
+
+    console.log("startIndex", startIndex);
     const fetchLatestBooks = async () => {
       try {
         const res = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=${numberOfItems}&key=${
+          `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=${maxNumberOfBooks}&startIndex=${startIndex}&key=${
             import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
           }`
         );
         const data = await res.json();
+        console.log("data", data.items);
 
-        const books = data.items.map((item: any) => ({
-          id: item.id,
-          title: item.volumeInfo.title,
-          authors: item.volumeInfo.authors || [],
-          description: item.volumeInfo.description || "",
-          imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
-        }));
+        const books: Book[] = data.items
+          .map((item: any) => ({
+            id: item.id,
+            title: item.volumeInfo.title,
+            authors: item.volumeInfo.authors || [],
+            description: item.volumeInfo.description || "",
+            imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
+          }))
+          .filter(
+            (book: Book, index: number, self: Book[]) =>
+              index ===
+              self.findIndex((b) => b.id === book.id || b.title === book.title)
+          );
 
         setBooks(books);
       } catch (error) {
@@ -34,12 +45,13 @@ const Books = ({ numberOfItems }: BooksProp) => {
     };
 
     fetchLatestBooks();
-  }, []);
+  }, [id]);
+
   return (
     <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full flex-wrap max-w-[1350px] mx-auto">
-      {books.map((book: Book) => (
-        <BookCard book={book} key={book.id} />
-      ))}
+      {books.length !== 0
+        ? books.map((book: Book) => <BookCard book={book} key={book.id} />)
+        : "No data found"}
     </section>
   );
 };
