@@ -3,17 +3,17 @@ import { Book } from "../definitions";
 import { Link } from "react-router-dom";
 
 type BooksProp = {
-  type: string;
+  numberOfItems: number;
 };
 
-const Books = ({ type }: BooksProp) => {
+const Books = ({ numberOfItems }: BooksProp) => {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
     const fetchLatestBooks = async () => {
       try {
         const res = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=8&key=${
+          `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=${numberOfItems}&key=${
             import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
           }`
         );
@@ -36,7 +36,7 @@ const Books = ({ type }: BooksProp) => {
     fetchLatestBooks();
   }, []);
   return (
-    <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full min-h-screen flex-wrap max-w-[1350px] mx-auto">
+    <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full flex-wrap max-w-[1350px] mx-auto">
       {books.map((book: Book) => (
         <BookCard book={book} key={book.id} />
       ))}

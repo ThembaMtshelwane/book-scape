@@ -5,7 +5,9 @@ const MainLayout = () => {
   return (
     <section>
       <Header />
-      <Outlet />
+      <section className="border-2 border-blue-500 flex flex-col items-center min-h-screen  w-fit max-w-[1350px]  mx-auto ">
+        <Outlet />
+      </section>
     </section>
   );
 };

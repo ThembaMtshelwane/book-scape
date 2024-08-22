@@ -8,7 +8,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 import MainLayout from "./layouts/MainLayout";
-import Books from "./components/Books";
+import Dashbaord from "./pages/Dashbaord";
 
 function App() {
   const router = createBrowserRouter(
@@ -19,7 +19,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
 
         <Route path="/dashbaord" element={<MainLayout />}>
-          <Route path="/dashbaord/" element={<Books type="" />} />
+          <Route path="/dashbaord/" element={<Dashbaord />} />
         </Route>
         <Route path="/books/" element={<MainLayout />}>
           <Route path="/books/:id" element={<>specific book</>} />
