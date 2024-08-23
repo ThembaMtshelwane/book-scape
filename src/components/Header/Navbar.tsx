@@ -7,30 +7,30 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between border-2 border-green-500 p-5 items-center">
       <Link
-        className="border-2 border-red-500 flex justify-center py-2 px-4"
+        className="border-2 border-yellowGreen rounded-[100%] w-[70px] h-[70px] flex justify-center py-2 px-4"
         to="/dashboard"
       >
         Logo
       </Link>
 
       <ul className=" hidden sm:flex ">
-        <li className="border-2 border-black  mx-1">
-          <Link className=" flex justify-center py-2 px-4" to="/dashbaord">
+        <li className="nav-item-desktop ">
+          <Link className=" flex justify-center py-2 px-4 " to="/favourites">
             Favourites
           </Link>
         </li>
-        <li className="border-2 border-black  mx-1">
-          <Link className=" flex justify-center py-2 px-4 " to="/dashbaord">
+        <li className="nav-item-desktop">
+          <Link className=" flex justify-center py-2 px-4 " to="/reading">
             Reaing
           </Link>
         </li>
-        <li className="border-2 border-black  mx-1">
-          <Link className=" flex justify-center py-2 px-4 " to="/dashbaord">
+        <li className="nav-item-desktop ">
+          <Link className=" flex justify-center py-2 px-4 " to="/to-read">
             To Read
           </Link>
         </li>
-        <li className="border-2 border-black  mx-1">
-          <Link className=" flex justify-center py-2 px-4" to="/dashbaord">
+        <li className="nav-item-desktop ">
+          <Link className=" flex justify-center py-2 px-4" to="/read">
             Read
           </Link>
         </li>
@@ -38,16 +38,16 @@ const Navbar = () => {
 
       {toggle ? (
         <IoMenu
-          className="sm:hidden"
+          className="sm:hidden hover:text-yellowGreen text-3xl nav-item-desktop "
           onClick={() => setToggle((prevState) => !prevState)}
         />
       ) : (
-        <ul className="fixed w-full h-full flex flex-col items-center bg-blueGray sm:hidden">
+        <ul className="fixed w-full h-screen top-0 left-0 flex flex-col items-center bg-blueGray sm:hidden">
           <li
             onClick={() => setToggle((prevState) => !prevState)}
             className="nav-item"
           >
-            <Link className=" w-full p-3 flex justify-center " to="/dashbaord">
+            <Link className=" w-full p-3 flex justify-center " to="/dashboard">
               <IoClose />
             </Link>
           </li>

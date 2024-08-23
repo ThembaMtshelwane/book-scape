@@ -24,25 +24,25 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
 
         <Route path="/dashboard" element={<MainLayout />}>
-          <Route
+          {/* <Route
             path="/dashboard/"
             element={<Dashboard />}
             loader={latestBooksLoader}
-          />
+          /> */}
         </Route>
         <Route path="/latest-books/:id" element={<MainLayout />}>
-          <Route
+          {/* <Route
             path="/latest-books/:id"
             element={<LatestBooks />}
             loader={allBooksLoader}
-          />
+          /> */}
         </Route>
         <Route path="/books/" element={<MainLayout />}>
-          <Route
+          {/* <Route
             path="/books/:searchItem/:geners/"
             element={<SearchResults />}
             loader={resultsLoader}
-          />
+          /> */}
         </Route>
       </Route>
     )

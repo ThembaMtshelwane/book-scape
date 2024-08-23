@@ -21,7 +21,7 @@ const Search = () => {
     .slice(0, 5);
 
   return (
-    <section>
+    <section className="border-2 h-full">
       <SearchMechanisms
         searchedItem={searchedItem}
         setSearchedItem={setSearchedItem}
