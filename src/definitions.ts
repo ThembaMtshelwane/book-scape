@@ -4,6 +4,8 @@ export type Book = {
   authors: string;
   description: string;
   imageUrl: string;
+  publishedDate?: string;
+  genres?: string[];
 };
 
 export const maxNumberOfBooksPerPage = 8;

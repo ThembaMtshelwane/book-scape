@@ -13,6 +13,7 @@ import { resultsLoader } from "./components/Header/Search/SearchMechanisms";
 import { SearchResults } from "./pages/SearchResults";
 import Dashboard from "./pages/Dashboard";
 import { allBooksLoader, latestBooksLoader } from "./utils";
+import { BooksProvider } from "./components/context/BooksContext";
 
 function App() {
   const router = createBrowserRouter(
@@ -46,7 +47,11 @@ function App() {
       </Route>
     )
   ); //
-  return <RouterProvider router={router} />;
+  return (
+    <BooksProvider>
+      <RouterProvider router={router} />
+    </BooksProvider>
+  );
 }
 
 export default App;

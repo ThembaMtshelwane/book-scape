@@ -1,4 +1,4 @@
-// get latest movies
+// Using Data loader ith OpenLibrary //
 
 import { maxNumberOfBooksPerPage, Book } from "./definitions";
 
@@ -74,4 +74,26 @@ export const allBooksLoader = async () => {
   } catch (error) {
     console.error("Error fetching latest books:", error);
   }
+};
+
+//  Uisng for Context for Google API
+/*
+Get
+*/
+const getRecent_8_books = `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=8&key=${
+  import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
+}`;
+export const fetchBooksFromAPI = async (
+  startIndex: number,
+  maxResults: number
+) => {
+  const response = await fetch(
+    `https://www.googleapis.com/books/v1/volumes?q=&startIndex=${startIndex}&maxResults=${maxResults}&key=${
+      import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
+    }`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch books");
+  }
+  return response.json();
 };
