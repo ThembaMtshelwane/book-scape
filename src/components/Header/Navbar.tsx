@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="flex justify-between border-2 border-green-500 p-5 items-center">
       <Link
         className="border-2 border-red-500 flex justify-center py-2 px-4"
-        to="/dashbaord"
+        to="/dashboard"
       >
         Logo
       </Link>

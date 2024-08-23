@@ -32,3 +32,96 @@ export const genres = [
   "Science",
   "Travel",
 ];
+
+export const allBooks = [
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+  {
+    id: "",
+    title: "Lorem ipsum dolor sit, amet",
+    authors: "Lorem ipsum dolor sit, amet",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
+    imageUrl: "login.jpg",
+    publishedDate: "",
+    genres: ["lorem", "lorem", "lorem"],
+  },
+];
