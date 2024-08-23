@@ -1,86 +1,52 @@
 import { useEffect, useState } from "react";
-import { Book } from "../definitions";
+import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import { Link, useParams } from "react-router-dom";
 
-type BooksProps = {
-  maxNumberOfBooks: number;
-};
-
-const Books = ({ maxNumberOfBooks }: BooksProps) => {
+const Books = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const startIndex = id ? (Number(id) - 1) * maxNumberOfBooks : 0;
-    // const fetchLatestBooks = async () => {
-    //   try {
-    //     const res = await fetch(
-    //       `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=${maxNumberOfBooks}&startIndex=${startIndex}&key=${
-    //         import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
-    //       }`
-    //     );
-    //     const data = await res.json();
-    //     console.log("data", data.items);
-
-    //     const books: Book[] = data.items
-    //       .map((item: any) => ({
-    //         id: item.id,
-    //         title: item.volumeInfo.title,
-    //         authors: item.volumeInfo.authors || [],
-    //         description: item.volumeInfo.description || "",
-    //         imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
-    //       }))
-    //       .filter(
-    //         (book: Book, index: number, self: Book[]) =>
-    //           index ===
-    //           self.findIndex((b) => b.id === book.id || b.title === book.title)
-    //       );
-
-    //     setBooks(books);
-    //   } catch (error) {
-    //     console.error("Error fetching latest books:", error);
-    //   }
-    // };
-
-    const fetchLatestBooks = async () => {
+    const startIndex = id ? (Number(id) - 1) * maxNumberOfBooksPerPage : 0;
+    const fetchBooks = async () => {
       try {
         const response = await fetch(
-          "https://openlibrary.org/subjects/fiction.json?limit=10"
+          `https://openlibrary.org/search.json?q=e&sort=new&limit=${maxNumberOfBooksPerPage}&offset=${startIndex}&language=eng`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        const bookDetails: Book[] = await Promise.all(
-          data.works.map(async (book: any) => {
-            const bookResponse = await fetch(
-              `https://openlibrary.org${book.key}.json`
-            );
-            const bookData = await bookResponse.json();
-            return {
-              id: book.key.split("/").pop() || "unknown",
-              title: book.title,
-              image: book.cover_id
-                ? `https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`
-                : null,
-              authors: bookData.authors
-                ? bookData.authors.map((author: any) => author.name).join(", ")
-                : "Unknown",
-              description: bookData.description
-                ? typeof bookData.description === "string"
-                  ? bookData.description
-                  : bookData.description.value
-                : "No description available",
-            };
-          })
-        );
+        console.log("data", data);
+
+        const bookDetails: Book[] = data.docs.map((book: any) => ({
+          id: book.key.split("/").pop() || "unknown",
+          title: book.title,
+          image: book.cover_i
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+            : null,
+          authors: book.author_name ? book.author_name.join(", ") : "Unknown",
+          description: book.first_sentence
+            ? book.first_sentence.join(" ")
+            : book.description
+            ? typeof book.description === "string"
+              ? book.description
+              : book.description.value
+            : book.subtitle
+            ? book.subtitle
+            : book.notes
+            ? book.notes
+            : book.excerpt
+            ? book.excerpt
+            : "No description available",
+        }));
         setBooks(bookDetails);
       } catch (error) {
         console.error("Error fetching latest books:", error);
       }
     };
 
-    fetchLatestBooks();
+    fetchBooks();
   }, [id]);
 
   return (
@@ -99,13 +65,7 @@ interface BookCardProps {
 }
 
 const BookCard = ({ book }: BookCardProps) => {
-  const [showFullDescription, setShowFullDescription] =
-    useState<boolean>(false);
-  let description = book.description;
-
-  if (!showFullDescription) {
-    description = description.substring(0, 90) + "...";
-  }
+  const description = book.description.substring(0, 90) + "...";
 
   return (
     <Link to={`/books/${book.id}`} key={book.id}>

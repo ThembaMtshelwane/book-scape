@@ -6,8 +6,7 @@ export type Book = {
   imageUrl: string;
 };
 
-export const maxNumberOfBooksDashboard = 8;
-export const maxNumberOfBooksLatest = 10;
+export const maxNumberOfBooksPerPage = 8;
 
 export const genres = [
   "Fiction",
