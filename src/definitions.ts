@@ -8,7 +8,7 @@ export type Book = {
   genres?: string[];
 };
 
-export const maxNumberOfBooksPerPage = 8;
+export const maxNumberOfBooksPerPage = 12;
 
 export const genres = [
   "Fiction",

@@ -16,8 +16,7 @@ const Books = ({ books }: booksPerPage) => {
       const endIndex = startIndex + maxNumberOfBooksPerPage;
       setBooksPerPage(books.slice(startIndex, endIndex));
     } else {
-      const n = 8;
-      setBooksPerPage(books.slice(0, n));
+      setBooksPerPage(books.slice(0, maxNumberOfBooksPerPage));
     }
   }, [id, books]);
 

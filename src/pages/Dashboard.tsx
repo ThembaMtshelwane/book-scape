@@ -10,7 +10,7 @@ const Dashboard = () => {
       <Books books={latestBooks} />
       <Link
         to="/latest-books/1"
-        className="text-center py-2 px-5 my-2 mx-auto border-2 border-blue-800  ml-auto md:mr-5"
+        className="text-center py-2 px-5 my-2 mx-auto border-2 border-blue-800 "
       >
         More
       </Link>

@@ -1,11 +1,12 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import Books from "../components/Books/Books";
 import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import { useBooks } from "../components/context/BooksContext";
+import { PaginationUI } from "../components/Pagination";
 
 const LatestBooks = () => {
-  const latestBooks = useLoaderData() as Book[];
-  const navigate = useNavigate();
+  // const latestBooks = useLoaderData() as Book[];
+
   const { allBooks, loading, error } = useBooks();
   console.log("allBooks", allBooks);
 
@@ -13,25 +14,12 @@ const LatestBooks = () => {
   if (error) return <div>Error: {error}</div>;
 
   // const MAX_PAGE_COUNT = latestBooks.length / maxNumberOfBooksPerPage; // = 400/20
-  const MAX_PAGE_COUNT2 = allBooks.length / maxNumberOfBooksPerPage; // = 400/20
-  const handleRouting = (index: number) => {
-    navigate(`/latest-books/${index}`);
-  };
+  const MAX_PAGE_COUNT2 = Math.ceil(allBooks.length / maxNumberOfBooksPerPage); // = 400/20
 
   return (
     <>
       <h1 className="text-3xl uppercase my-5">latest books</h1>
-      <ul className="flex border-2 border-black my-2">
-        {[...Array(MAX_PAGE_COUNT2)].map((_, i) => (
-          <li
-            key={i}
-            className="border-2 border-black m-2 py-2 px-4 cursor-pointer"
-            onClick={() => handleRouting(i + 1)}
-          >
-            {i + 1}
-          </li>
-        ))}
-      </ul>
+      <PaginationUI maxPageCount={MAX_PAGE_COUNT2} />
       <Books books={allBooks} />
     </>
   );
