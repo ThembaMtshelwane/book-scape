@@ -18,7 +18,7 @@ const Books = ({ books }: booksPerPage) => {
       const n = 8;
       setBooksPerPage(books.slice(0, n));
     }
-  }, [id]);
+  }, [id, books]);
 
   return (
     <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full flex-wrap max-w-[1350px] mx-auto">
