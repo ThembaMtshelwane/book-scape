@@ -1,5 +1,5 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import Books from "../components/Books";
+import Books from "../components/Books/Books";
 import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import { useBooks } from "../components/context/BooksContext";
 

@@ -77,12 +77,10 @@ export const allBooksLoader = async () => {
 };
 
 //  Uisng for Context for Google API
-/*
-Get
-*/
 const getRecent_8_books = `https://www.googleapis.com/books/v1/volumes?q=books&orderBy=newest&maxResults=8&key=${
   import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
 }`;
+
 export const fetchBooksFromAPI = async (
   startIndex: number,
   maxResults: number
