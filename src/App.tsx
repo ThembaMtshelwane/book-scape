@@ -12,6 +12,7 @@ import LatestBooks from "./pages/LatestBooks";
 import { resultsLoader } from "./components/Header/Search/SearchMechanisms";
 import { SearchResults } from "./pages/SearchResults";
 import Dashboard from "./pages/Dashboard";
+import { allBooksLoader, latestBooksLoader } from "./utils";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,10 +23,18 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
 
         <Route path="/dashboard" element={<MainLayout />}>
-          <Route path="/dashboard/" element={<Dashboard />} />
+          <Route
+            path="/dashboard/"
+            element={<Dashboard />}
+            loader={latestBooksLoader}
+          />
         </Route>
         <Route path="/latest-books/:id" element={<MainLayout />}>
-          <Route path="/latest-books/:id" element={<LatestBooks />} />
+          <Route
+            path="/latest-books/:id"
+            element={<LatestBooks />}
+            loader={allBooksLoader}
+          />
         </Route>
         <Route path="/books/" element={<MainLayout />}>
           <Route

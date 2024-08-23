@@ -2,57 +2,30 @@ import { useEffect, useState } from "react";
 import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import { Link, useParams } from "react-router-dom";
 
-const Books = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+interface booksPerPage {
+  books: Book[];
+}
+const Books = ({ books }: booksPerPage) => {
+  const [booksPerPage, setBooksPerPage] = useState<Book[]>([]);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const startIndex = id ? (Number(id) - 1) * maxNumberOfBooksPerPage : 0;
-    const fetchBooks = async () => {
-      try {
-        const response = await fetch(
-          `https://openlibrary.org/search.json?q=e&sort=new&limit=${maxNumberOfBooksPerPage}&offset=${startIndex}&language=eng`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log("data", data);
-
-        const bookDetails: Book[] = data.docs.map((book: any) => ({
-          id: book.key.split("/").pop() || "unknown",
-          title: book.title,
-          image: book.cover_i
-            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-            : null,
-          authors: book.author_name ? book.author_name.join(", ") : "Unknown",
-          description: book.first_sentence
-            ? book.first_sentence.join(" ")
-            : book.description
-            ? typeof book.description === "string"
-              ? book.description
-              : book.description.value
-            : book.subtitle
-            ? book.subtitle
-            : book.notes
-            ? book.notes
-            : book.excerpt
-            ? book.excerpt
-            : "No description available",
-        }));
-        setBooks(bookDetails);
-      } catch (error) {
-        console.error("Error fetching latest books:", error);
-      }
-    };
-
-    fetchBooks();
+    if (id) {
+      const startIndex = (Number(id) - 1) * maxNumberOfBooksPerPage;
+      const endIndex = startIndex + maxNumberOfBooksPerPage;
+      setBooksPerPage(books.slice(startIndex, endIndex));
+    } else {
+      const n = 8;
+      setBooksPerPage(books.slice(0, n));
+    }
   }, [id]);
 
   return (
     <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full flex-wrap max-w-[1350px] mx-auto">
-      {books.length !== 0
-        ? books.map((book: Book) => <BookCard book={book} key={book.id} />)
+      {booksPerPage.length !== 0
+        ? booksPerPage.map((book: Book) => (
+            <BookCard book={book} key={book.id} />
+          ))
         : "No data found"}
     </section>
   );

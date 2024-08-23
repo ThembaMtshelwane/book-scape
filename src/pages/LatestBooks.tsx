@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Books from "../components/Books";
 import { Book, maxNumberOfBooksPerPage } from "../definitions";
 
 const LatestBooks = () => {
-  const latestBooks: Book[] = [];
+  const latestBooks = useLoaderData() as Book[];
   const navigate = useNavigate();
+
   const MAX_PAGE_COUNT = latestBooks.length / maxNumberOfBooksPerPage; // = 400/20
   const handleRouting = (index: number) => {
     navigate(`/latest-books/${index}`);
@@ -24,7 +25,7 @@ const LatestBooks = () => {
           </li>
         ))}
       </ul>
-      <Books />
+      <Books books={latestBooks} />
     </>
   );
 };
