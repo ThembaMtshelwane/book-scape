@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useBooks } from "../components/context/BooksContext";
 
 const LatestBooks = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const { allBooks, allLoading } = useBooks();
   const latestBooks = allBooks;
   const { id } = useParams<{ id: string }>();
@@ -23,6 +24,7 @@ const LatestBooks = () => {
   console.log("MAX_PAGE_COUNT", MAX_PAGE_COUNT);
 
   useEffect(() => {
+    setLoading(true);
     const validPageNumber = Math.max(1, Math.min(pageNumber, MAX_PAGE_COUNT));
     const startIndex = (validPageNumber - 1) * maxNumberOfBooksPerPage;
     const endIndex = Math.min(
@@ -32,7 +34,12 @@ const LatestBooks = () => {
 
     console.log("sliced", latestBooks.slice(startIndex, endIndex));
     setPaginatedBooks(latestBooks.slice(startIndex, endIndex));
+    setLoading(false);
   }, [latestBooks, pageNumber, MAX_PAGE_COUNT]);
+
+  if (loading) {
+    <>What the hell</>;
+  }
 
   return (
     <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 relative">

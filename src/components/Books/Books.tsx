@@ -7,7 +7,7 @@ interface booksPerPage {
 }
 const Books = ({ books }: booksPerPage) => {
   return (
-    <section className="flex gap-4 flex-col items-center justify-center sm:flex-row border-2 border-black w-full flex-wrap max-w-[1350px] mx-auto">
+    <section className="flex gap-4 flex-col items-center justify-center sm:flex-row w-full flex-wrap max-w-[1350px] mx-auto">
       {books.length !== 0
         ? books.map((book: Book) => <BookCard book={book} key={book.id} />)
         : "No data found"}

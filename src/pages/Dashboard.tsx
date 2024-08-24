@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
 import Books from "../components/Books/Books";
-import { useLatestBooks } from "../components/context/LatestBooksContext";
 import Spinner from "../components/Spinners/Spinner";
 import { useBooks } from "../components/context/BooksContext";
 
 const Dashboard = () => {
-  const { lastestLoading } = useLatestBooks();
-  const { allBooks } = useBooks();
+  const { allBooks, allLoading } = useBooks();
   const latestBooks = allBooks.slice(0.8);
   console.log("latestBooks", latestBooks);
 
   return (
     <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 ">
       <h1 className="text-3xl uppercase my-5">latest books</h1>
-      {lastestLoading ? (
+      {allLoading ? (
         <section>
           <p className="text-yellowGreen text-3xl md:text-5xl">
             Loading latest books...
           </p>
-          <Spinner loading={lastestLoading} />
+          <Spinner loading={allLoading} />
         </section>
       ) : (
         <>
