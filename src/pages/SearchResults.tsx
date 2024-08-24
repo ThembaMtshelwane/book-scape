@@ -1,6 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { allBooks, Book } from "../definitions";
 import Books from "../components/Books/Books";
+import SubHeader from "../components/SubHeader";
 
 export const SearchResults = () => {
   // const results = useLoaderData() as Book[];
@@ -14,9 +15,7 @@ export const SearchResults = () => {
   console.log(searchedGenres);
   return (
     <section className="flex flex-col items-center my-10">
-      <h2 className="text-3xl my-10 sm:text-4xl md:text-5xl">
-        Search Results...
-      </h2>
+      <SubHeader subheading=" Search Results..." />
       <section className="w-[95%] my-5">
         <p>
           <span className="font-bold"> Searched for:</span> {searchItem}{" "}

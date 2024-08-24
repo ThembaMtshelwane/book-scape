@@ -14,6 +14,7 @@ import { SearchResults } from "./pages/SearchResults";
 import Dashboard from "./pages/Dashboard";
 import { allBooksLoader, latestBooksLoader } from "./utils";
 import { BooksProvider } from "./components/context/BooksContext";
+import SingleBook from "./pages/SingleBook";
 
 function App() {
   const router = createBrowserRouter(
@@ -39,8 +40,13 @@ function App() {
         </Route>
         <Route path="/books/" element={<MainLayout />}>
           <Route
-            path="/books/:searchItem/:genres/"
+            path="/books/:searchItem/:gens/"
             element={<SearchResults />}
+            // loader={resultsLoader}
+          />
+          <Route
+            path="/books/:id"
+            element={<SingleBook />}
             // loader={resultsLoader}
           />
         </Route>
