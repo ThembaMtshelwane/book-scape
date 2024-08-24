@@ -7,10 +7,14 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between  p-5 items-center">
       <Link
-        className="border-2 border-yellowGreen rounded-[100%] w-[70px] h-[70px] flex justify-center py-2 px-4"
+        className=" flex justify-center py-2 px-4 overflow-hidden"
         to="/dashboard"
       >
-        Logo
+        <img
+          src="logo.jpg"
+          alt=""
+          className="object-cover object-centerborder-2 border-yellowGreen rounded-[100%] w-[90px] h-[90px] "
+        />
       </Link>
 
       <ul className=" hidden sm:flex ">

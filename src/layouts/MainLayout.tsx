@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer";
 
 const MainLayout = () => {
   return (
@@ -15,6 +16,7 @@ const MainLayout = () => {
       <section className="border-2 border-blue-500 bg-backgroundColour flex flex-col items-center min-h-screen md:w-[90%] lg:max-w-[1350px]  mx-auto opacity-[0.98] md:opacity-[0.99] relative -z-10">
         <Outlet />
       </section>
+      <Footer />
     </section>
   );
 };
