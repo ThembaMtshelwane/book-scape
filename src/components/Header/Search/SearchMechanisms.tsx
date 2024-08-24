@@ -21,6 +21,7 @@ const SearchMechanisms = ({
   setSearchOptions,
   setDropdownVisible,
 }: SearchMechanismsProps) => {
+  const MAX_NUMBER_OF_OPTIONS = 5;
   const [filterToggle, setFilterToggle] = useState<boolean>(true);
   const navigate = useNavigate();
   const [selectedGenres, setSelectedGenres] = useState([]);
@@ -54,30 +55,6 @@ const SearchMechanisms = ({
     console.log(inputText);
 
     try {
-      // const genreQueries = selectedGenres
-      //   .map((genre) => `subject:${genre}`)
-      //   .join(" OR ");
-      // const query = `${e.target.value}${selectedGenres.length ? `+(${genreQueries})` : ""}`;
-      // const res = await fetch(
-      /*
-        const genreQueries = selectedGenres.map(genre => `subject:${genre}`).join(" OR ");
-        const query = `${e.target.value}${selectedGenres.length ? `+(${genreQueries})` : ""}`;
-       */
-
-      //   `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${
-      //     import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
-      //   }`
-      // );
-      // const data = await res.json();
-
-      // const books = data.items.map((item: any) => ({
-      //   id: item.id,
-      //   title: item.volumeInfo.title,
-      //   authors: item.volumeInfo.authors || [],
-      //   description: item.volumeInfo.description || "",
-      //   imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
-      // }));
-
       const filteredBooks = books
         .filter((book) => {
           const titleLowerCase = book.title.toLocaleLowerCase();
@@ -102,7 +79,7 @@ const SearchMechanisms = ({
           return scoreB - scoreA; // Sort in descending order (higher score first)
         });
 
-      setSearchOptions(filteredBooks.slice(0, 5));
+      setSearchOptions(filteredBooks.slice(0, MAX_NUMBER_OF_OPTIONS));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -149,7 +126,7 @@ const SearchMechanisms = ({
           <IoSearch className="" />
         </button>
       </section>
-      <section className=" ">
+      <section className="w-[50%] ml-auto ">
         {filterToggle ? (
           <CiFilter
             className=" text-white text-3xl ml-auto my-5 mr-5 hover:scale-105 hover:text-yellowGreen "

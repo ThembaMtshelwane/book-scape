@@ -10,57 +10,15 @@ const SingleBook = () => {
   const { allBooks } = useBooks();
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchSingleBook = async (bookId: string) => {
-      try {
-        const response = await fetch(
-          `https://openlibrary.org/works/${bookId}.json`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch book details");
-        }
-        const bookData = await response.json();
-        const book: Book = {
-          id: bookData.key.split("/").pop() || "unknown",
-          title: bookData.title,
-          imageUrl: bookData.covers
-            ? `https://covers.openlibrary.org/b/id/${bookData.covers[0]}-L.jpg`
-            : "/default-image.jpg",
-          authors: bookData.authors
-            ? bookData.authors.map((author: any) => author.name).join(", ")
-            : "Unknown",
-          description: bookData.description
-            ? typeof bookData.description === "string"
-              ? bookData.description
-              : bookData.description.value
-            : "No description available",
-          publishedDate: bookData.first_publish_date || "Unknown",
-          genres: bookData.subjects || [],
-        };
-        setSingleBook(book);
-        setLoading(false);
-      } catch (error) {
-        setError("Could not load book details");
-        console.log(error);
-
-        setLoading(false);
-      }
-    };
-
     const localBook = allBooks.find((book) => id === book.id);
     if (localBook) {
       setSingleBook(localBook);
       setLoading(false);
-    } else if (id) {
-      fetchSingleBook(id);
     }
   }, [id, allBooks]);
 
-  if (error) {
-    return <>{error}</>;
-  }
   return (
     <>
       {loading ? (

@@ -12,6 +12,7 @@ export const PaginationUI = ({ path, maxPageCount }: PaginationUIProps) => {
   const handleRouting = (index: number) => {
     setCurrentPage(index);
     navigate(`/${path}/${index}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const getPageNumbers = () => {
     const pages = [];
@@ -31,7 +32,7 @@ export const PaginationUI = ({ path, maxPageCount }: PaginationUIProps) => {
     <ul className="flex flex-wrap justify-center my-2 p-2 space-x-2">
       {currentPage > 3 && (
         <li
-          className="border-2 border-yellowGreen py-1 px-3 cursor-pointer hover:bg-yellowGreen hover:text-backgroundColour"
+          className="border-2 border-yellowGreen py-1 px-3 cursor-pointer hover:bg-yellowGreen hover:text-backgroundColour my-auto"
           onClick={() => handleRouting(1)}
         >
           1
@@ -41,7 +42,7 @@ export const PaginationUI = ({ path, maxPageCount }: PaginationUIProps) => {
       {getPageNumbers().map((page) => (
         <li
           key={page}
-          className={`border-2 border-yellowGreen py-1 px-3 cursor-pointer hover:bg-yellowGreen hover:text-backgroundColour ${
+          className={`border-2 border-yellowGreen py-1 px-3 cursor-pointer hover:bg-yellowGreen hover:text-backgroundColour my-auto ${
             page === currentPage ? " text-backgroundColour bg-yellowGreen" : ""
           }`}
           onClick={() => handleRouting(page)}
@@ -52,7 +53,7 @@ export const PaginationUI = ({ path, maxPageCount }: PaginationUIProps) => {
       {currentPage < maxPageCount - 3 && <li className="py-1 px-3">...</li>}
       {currentPage < maxPageCount - 2 && (
         <li
-          className="border-2 border-yellowGreen py-1 px-3 m-1 cursor-pointer hover:bg-yellowGreen hover:text-backgroundColour"
+          className="border-2 border-yellowGreen py-1 px-3 m-1 cursor-pointer hover:bg-yellowGreen hover:text-backgroundColour my-auto"
           onClick={() => handleRouting(maxPageCount)}
         >
           {maxPageCount}

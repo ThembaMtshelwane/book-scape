@@ -16,52 +16,6 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
   const [allLoading, setAllLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
-  /***********   Open Library  *********** */
-  // useEffect(() => {
-  //   const fetchBooksData = async () => {
-  //     try {
-  //       const allBooksResponse = await fetch(
-  //         `https://openlibrary.org/search.json?q=e&sort=new&limit=400&language=eng`
-  //       );
-  //       if (!allBooksResponse.ok) {
-  //         throw new Error("Failed to fetch all books");
-  //       }
-  //       const allBooksData = await allBooksResponse.json();
-  //       const allBooksArray = allBooksData.docs.map((book: any) => ({
-  //         id: book.key.split("/").pop() || "unknown",
-  //         title: book.title,
-  //         imageUrl: book.cover_i
-  //           ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-  //           : null,
-  //         authors: book.author_name ? book.author_name.join(", ") : "Unknown",
-  //         description: book.first_sentence
-  //           ? book.first_sentence.join(" ")
-  //           : book.description
-  //           ? typeof book.description === "string"
-  //             ? book.description
-  //             : book.description.value
-  //           : book.subtitle
-  //           ? book.subtitle
-  //           : book.notes
-  //           ? book.notes
-  //           : book.excerpt
-  //           ? book.excerpt
-  //           : "No description available",
-  //       }));
-
-  //       setAllBooks(allBooksArray);
-
-  //       setAllLoading(false);
-  //     } catch (error) {
-  //       setError("Cannot fetch book data");
-  //       console.log(error);
-  //       setAllLoading(false);
-  //     }
-  //   };
-
-  //   fetchBooksData();
-  // }, []);
-
   /***********   Google API  *********** */
   useEffect(() => {
     const fetchBooksData = async () => {
@@ -91,7 +45,9 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
             authors: book.volumeInfo.authors?.join(", ") || "Unknown",
             description:
               book.volumeInfo.description || "No description available",
-            publishedDate: book.volumeInfo.publishedDate,
+            publishedDate:
+              book.volumeInfo.publishedDate || "No published  date available",
+            genres: book.volumeInfo.categories || [],
           }));
 
           allBooksArray = [...allBooksArray, ...books];

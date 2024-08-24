@@ -55,6 +55,7 @@ const LatestBooks = () => {
         <>
           <PaginationUI maxPageCount={MAX_PAGE_COUNT} path={"latest-books"} />
           <Books books={paginatedBooks} />
+          <PaginationUI maxPageCount={MAX_PAGE_COUNT} path={"latest-books"} />
         </>
       )}
     </section>

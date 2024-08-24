@@ -20,11 +20,13 @@ const Dashboard = () => {
         </section>
       ) : (
         <>
-          {" "}
           <Books books={latestBooks.slice(0, 8)} />
           <Link
             to="/latest-books/1"
-            className="text-center py-2 px-5 my-2 mx-auto border-2 border-blue-800 "
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="text-center py-2 px-5 my-2 mx-auto button "
           >
             More
           </Link>

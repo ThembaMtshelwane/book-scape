@@ -16,8 +16,20 @@
   font-size: 16px;
 }
 
+html {
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--primary-colour: );
+}
+
+.bg-paper {
+  background-image: url("/background.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 p,

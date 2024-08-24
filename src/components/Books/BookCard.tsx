@@ -16,7 +16,7 @@ const BookCard = ({ book }: BookCardProps) => {
             className="object-center object-cover h-full w-full"
           />
         </section>
-        <section className=" p-4 h-[40%]  flex flex-col ">
+        <section className=" p-4 h-[40%]  flex flex-col bg-paper ">
           <h3 className="text-2xl my-2 ">{book.title}</h3>
           <p className="text-sm truncate">{book.description}</p>
         </section>

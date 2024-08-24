@@ -52,7 +52,7 @@ const Navbar = () => {
           onClick={() => setToggle((prevState) => !prevState)}
         />
       ) : (
-        <ul className="fixed w-full h-screen top-0 left-0 flex flex-col items-center bg-blueGray sm:hidden">
+        <ul className="fixed z-[999] w-full h-screen border-[5px] border-green-500 top-0 left-0 flex flex-col items-center bg-blueGray sm:hidden">
           <li
             onClick={() => setToggle((prevState) => !prevState)}
             className="nav-item"

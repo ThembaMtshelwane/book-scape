@@ -15,7 +15,7 @@ export const ShowSearchOptions = ({
 }: ShowSearchOptionsProps) => {
   return (
     <ul
-      className={`border-2 w-full absolute bg-backgroundColour flex flex-col ${
+      className={`w-full absolute bg-backgroundColour flex flex-col ${
         isDropdownVisible ? "" : "hidden"
       }`}
     >
