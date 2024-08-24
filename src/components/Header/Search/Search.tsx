@@ -21,7 +21,7 @@ const Search = () => {
     .slice(0, 5);
 
   return (
-    <section className=" h-full flex flex-col justify-center sm:items-center">
+    <section className="flex flex-col justify-center sm:items-center">
       <SearchMechanisms
         searchedItem={searchedItem}
         setSearchedItem={setSearchedItem}

@@ -13,7 +13,7 @@ const Navbar = () => {
         <img
           src="/logo.jpg"
           alt=""
-          className="object-cover object-centerborder-2 border-yellowGreen rounded-[100%] w-[90px] h-[90px] "
+          className="object-cover object-centerborder-2 border-yellowGreen rounded-[100%] w-[60px] h-[60px] "
         />
       </Link>
 

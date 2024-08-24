@@ -118,7 +118,7 @@ const SearchMechanisms = ({
       <section className=" ">
         {filterToggle ? (
           <CiFilter
-            className="text-white text-3xl ml-auto my-5 mr-5 hover:scale-105 hover:text-yellowGreen "
+            className=" text-white text-3xl ml-auto my-5 mr-5 hover:scale-105 hover:text-yellowGreen "
             onClick={() => setFilterToggle((prevState) => !prevState)}
           />
         ) : (
@@ -130,7 +130,7 @@ const SearchMechanisms = ({
               />
             </section>
             <Multiselect
-              className="text-textColour bg-backgroundColour hover:scale-[1.005] "
+              className="absolute z-20 text-textColour bg-backgroundColour hover:scale-[1.005] "
               options={genres}
               isObject={false}
               onKeyPressFn={function noRefCheck() {}}
