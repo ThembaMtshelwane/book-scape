@@ -38,10 +38,10 @@ h2 {
 
 @layer components {
   .auth-container {
-    @apply h-[60%] bg-backgroundColour w-full  max-w-[550px] flex flex-col items-center justify-center;
+    @apply p-10 bg-backgroundColour w-full  max-w-[550px] flex flex-col items-center justify-center rounded-[25px];
   }
   .auth-form {
-    @apply flex flex-col border-2 border-black w-[80%];
+    @apply flex flex-col w-[80%];
   }
   .nav-item {
     @apply border-2 text-backgroundColour w-full flex justify-center m-2 hover:text-yellowGreen hover:scale-110  hover:border-yellowGreen;
@@ -49,5 +49,9 @@ h2 {
 
   .nav-item-desktop {
     @apply nav-item  w-fit border-none flex items-center mx-2;
+  }
+
+  .button {
+    @apply text-backgroundColour  bg-yellowGreen hover:scale-105 text-center;
   }
 }

@@ -4,7 +4,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate(`/dashbaord`);
+    navigate(`/dashboard`);
   };
   return (
     <section
@@ -16,7 +16,7 @@ const Login = () => {
       }}
     >
       <section className="auth-container">
-        <h1 className="text-5xl border-2 border-black mb-8">BookScape</h1>
+        <h1 className="text-5xl  mb-8">BookScape</h1>
         <form onSubmit={handleLogin} className="auth-form">
           <label className="my-2" htmlFor="email">
             Email
@@ -40,7 +40,7 @@ const Login = () => {
             name="password"
             placeholder="Password"
           />
-          <button className="my-2 border-2 border-black p-2" type="submit">
+          <button className="my-2  button p-2" type="submit">
             Login
           </button>
         </form>
