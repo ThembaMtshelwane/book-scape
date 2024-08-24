@@ -17,11 +17,14 @@ const LandingPage = () => {
         </section>
       </section>
       <section className="flex flex-col  items-center absolute bottom-[33%] w-full md:flex-row md:justify-center md:static ">
-        <Link className="p-2  w-[150px] m-2 button" to="/login">
+        {/* <Link className="p-2  w-[150px] m-2 button" to="/login">
           Login
         </Link>
         <Link className="p-2 w-[150px] m-2 button" to="/signup">
           Sign-Up
+        </Link> */}
+        <Link className="p-2 w-[150px] m-2 button" to="/dashboard">
+          Enter
         </Link>
       </section>
     </section>
