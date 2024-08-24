@@ -3,6 +3,7 @@ import { Book } from "../definitions";
 import SubHeader from "../components/SubHeader";
 import { useParams } from "react-router-dom";
 import { useBooks } from "../components/context/BooksContext";
+import Spinner from "../components/Spinners/Spinner";
 
 const SingleBook = () => {
   const [singleBook, setSingleBook] = useState<Book>();
@@ -58,19 +59,16 @@ const SingleBook = () => {
     }
   }, [id, allBooks]);
 
-  if (error) {
-    return (
-      <p className="text-yellowGreen text-3xl md:text-5xl">Book not found</p>
-    );
-  }
-
   return (
     <>
       {loading ? (
-        <p className="text-yellowGreen text-3xl md:text-5xl">
-          Loading book details...
-        </p>
-      ) : (
+        <section>
+          <p className="text-yellowGreen text-3xl md:text-5xl">
+            Loading book details...
+          </p>
+          <Spinner loading={loading} />
+        </section>
+      ) : singleBook ? (
         <section className="flex flex-col items-center  h-full">
           <SubHeader subheading={singleBook.title} />
 
@@ -111,6 +109,8 @@ const SingleBook = () => {
             </section>
           </section>
         </section>
+      ) : (
+        <p className="text-yellowGreen text-3xl md:text-5xl">Book not found</p>
       )}
     </>
   );
