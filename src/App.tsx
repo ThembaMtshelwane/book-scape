@@ -18,6 +18,7 @@ import SingleBook from "./pages/SingleBook";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import { SearchResultsProvider } from "./components/context/SearchResultsContext";
+import { LatestBooksProvider } from "./components/context/LatestBooksContext";
 
 function App() {
   const router = createBrowserRouter(
@@ -32,11 +33,7 @@ function App() {
         </Route>
 
         <Route path="/dashboard" element={<MainLayout />}>
-          {/* <Route
-            path="/dashboard/"
-            element={<Dashboard />}
-            loader={latestBooksLoader}
-          /> */}
+          <Route index element={<Dashboard />} />
         </Route>
         <Route path="/latest-books/:id" element={<MainLayout />}>
           {/* <Route
@@ -73,7 +70,9 @@ function App() {
   return (
     <BooksProvider>
       <SearchResultsProvider>
-        <RouterProvider router={router} />
+        <LatestBooksProvider>
+          <RouterProvider router={router} />
+        </LatestBooksProvider>
       </SearchResultsProvider>
     </BooksProvider>
   );

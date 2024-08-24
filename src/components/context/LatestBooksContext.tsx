@@ -1,19 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Book } from "../../definitions";
 
-interface BooksContextType {
-  allBooks: Book[];
+interface LatestBooksContextType {
   latestBooks: Book[];
   loading: boolean;
   error: string | null;
 }
 
-const BooksContext = createContext<BooksContextType | undefined>(undefined);
+const LatestBooksContext = createContext<LatestBooksContextType | undefined>(
+  undefined
+);
 
-export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
+export const LatestBooksProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [allBooks, setAllBooks] = useState<Book[]>([]);
   const [latestBooks, setLatestBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -22,37 +22,6 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchBooksData = async () => {
       try {
-        const allBooksResponse = await fetch(
-          `https://openlibrary.org/search.json?q=e&sort=new&limit=400&language=eng`
-        );
-        if (!allBooksResponse.ok) {
-          throw new Error("Failed to fetch all books");
-        }
-        const allBooksData = await allBooksResponse.json();
-        const allBooksArray = allBooksData.docs.map((book: any) => ({
-          id: book.key.split("/").pop() || "unknown",
-          title: book.title,
-          imageUrl: book.cover_i
-            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-            : null,
-          authors: book.author_name ? book.author_name.join(", ") : "Unknown",
-          description: book.first_sentence
-            ? book.first_sentence.join(" ")
-            : book.description
-            ? typeof book.description === "string"
-              ? book.description
-              : book.description.value
-            : book.subtitle
-            ? book.subtitle
-            : book.notes
-            ? book.notes
-            : book.excerpt
-            ? book.excerpt
-            : "No description available",
-        }));
-
-        setAllBooks(allBooksArray);
-
         const latestBooksResponse = await fetch(
           `https://openlibrary.org/search.json?q=e&sort=new&limit=40&language=eng`
         );
@@ -85,7 +54,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
 
         setLoading(false);
       } catch (error) {
-        setError("Cannot fetch book data");
+        setError("Cannot fetch latest books");
         console.log(error);
         setLoading(false);
       }
@@ -146,16 +115,16 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
   // }, []);
 
   return (
-    <BooksContext.Provider value={{ allBooks, latestBooks, loading, error }}>
+    <LatestBooksContext.Provider value={{ latestBooks, loading, error }}>
       {children}
-    </BooksContext.Provider>
+    </LatestBooksContext.Provider>
   );
 };
 
-export const useBooks = () => {
-  const context = useContext(BooksContext);
+export const useLatestBooks = () => {
+  const context = useContext(LatestBooksContext);
   if (context === undefined) {
-    throw new Error("useBooks must be used within a BooksProvider");
+    throw new Error("useLatestBooks must be used within a BooksProvider");
   }
   return context;
 };
