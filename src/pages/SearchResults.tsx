@@ -16,7 +16,7 @@ export const SearchResults = () => {
   return (
     <section className="flex flex-col items-center justify-center my-10">
       <SubHeader subheading=" Search Results..." />
-      <section className="w-[95%] mb-5 p-5 border-2 border-red-500 flex flex-col sm:flex-row sm:w-[60%] sm:justify-between">
+      <section className="w-[95%] mb-5 p-5 flex flex-col sm:flex-row sm:w-[60%] sm:justify-between">
         <p className="text-xl">
           <span className="font-bold text-xl capitalize"> Searched for:</span>{" "}
           <span className="font-bold text-xl capitalize">{searchItem}</span>
