@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = { subheading: string };
 
 const SubHeader = ({ subheading }: Props) => {

@@ -44,7 +44,7 @@ h2 {
     @apply flex flex-col w-[80%];
   }
   .nav-item {
-    @apply border-2 text-backgroundColour w-full flex justify-center m-2 hover:text-yellowGreen hover:scale-110  hover:border-yellowGreen;
+    @apply border-2 text-backgroundColour  flex justify-center m-2 hover:text-yellowGreen hover:scale-105  hover:border-yellowGreen w-[80%];
   }
 
   .nav-item-desktop {

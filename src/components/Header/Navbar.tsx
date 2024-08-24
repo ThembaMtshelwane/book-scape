@@ -19,25 +19,31 @@ const Navbar = () => {
 
       <ul className=" hidden sm:flex ">
         <li className="nav-item-desktop ">
-          <Link className=" flex justify-center py-2 px-4 " to="/favourites">
-            Favourites
+          <Link
+            className=" flex justify-center py-2 px-4 "
+            to="/latest-books/1"
+          >
+            {/* Favourites */}
+            Latest Books
           </Link>
         </li>
         <li className="nav-item-desktop">
-          <Link className=" flex justify-center py-2 px-4 " to="/reading">
-            Reaing
+          <Link className=" flex justify-center py-2 px-4 " to="/about-us">
+            {/* Reaing */}
+            About Us
           </Link>
         </li>
+
         <li className="nav-item-desktop ">
-          <Link className=" flex justify-center py-2 px-4 " to="/to-read">
-            To Read
+          <Link className=" flex justify-center py-2 px-4 " to="/">
+            Log-Out
           </Link>
         </li>
-        <li className="nav-item-desktop ">
+        {/* <li className="nav-item-desktop ">
           <Link className=" flex justify-center py-2 px-4" to="/read">
             Read
           </Link>
-        </li>
+        </li> */}
       </ul>
 
       {toggle ? (
@@ -56,16 +62,22 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="w-full p-3 flex justify-center" to="/favourites">
-              Favourites
+            <Link
+              className="w-full p-3 flex justify-center"
+              to="/latest-books/1"
+            >
+              {/* Favourites */}
+              Latest Books
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="w-full p-3 flex justify-center" to="/reading">
-              Reaing
+            <Link className="w-full p-3 flex justify-center" to="/about-us">
+              {/* Reaing */}
+              About Us
             </Link>
           </li>
-          <li className="nav-item">
+
+          {/* <li className="nav-item">
             <Link className="w-full p-3 flex justify-center" to="/to-read">
               To Read
             </Link>
@@ -73,6 +85,12 @@ const Navbar = () => {
           <li className="nav-item">
             <Link className="w-full p-3 flex justify-center" to="/read">
               Read
+            </Link>
+          </li> */}
+
+          <li className="nav-item ">
+            <Link className=" flex justify-center py-2 px-4 " to="/">
+              Log-Out
             </Link>
           </li>
         </ul>

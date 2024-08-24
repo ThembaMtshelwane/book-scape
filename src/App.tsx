@@ -15,6 +15,8 @@ import Dashboard from "./pages/Dashboard";
 import { allBooksLoader, latestBooksLoader } from "./utils";
 import { BooksProvider } from "./components/context/BooksContext";
 import SingleBook from "./pages/SingleBook";
+import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,6 +25,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+
+        <Route path="/about-us" element={<About />} />
 
         <Route path="/dashboard" element={<MainLayout />}>
           {/* <Route
@@ -50,6 +54,12 @@ function App() {
             // loader={resultsLoader}
           />
         </Route>
+
+        <Route
+          path="/*"
+          element={<NotFound />}
+          // loader={resultsLoader}
+        />
       </Route>
     )
   ); //
