@@ -11,7 +11,6 @@ const SingleBook = () => {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  console.log("allBooks", allBooks);
 
   useEffect(() => {
     const fetchSingleBook = async (bookId: string) => {
@@ -83,10 +82,12 @@ const SingleBook = () => {
 
             <section className="p-3 w-[90%]  flex flex-col gap-3 sm:ml-4  sm:justify-center sm:w-[50%] sm:h-full md:w-[500px]">
               <h3 className="text-2xl">{singleBook.title}</h3>
-              <p>{singleBook.description}</p>
+              <p className="w-[90%] text-justify text-wrap truncate">
+                {singleBook.description}
+              </p>
               <p>
                 <span className="font-bold">By:</span>{" "}
-                <span> {singleBook.authors}</span>
+                <span className="w-full"> {singleBook.authors}</span>
               </p>
               <p>
                 <span className="font-bold">Published:</span>{" "}
@@ -97,9 +98,9 @@ const SingleBook = () => {
                   <span className="font-bold">Genres:</span>
                 </p>
                 <ul className="flex flex-col">
-                  {singleBook.genres?.map((genre) => {
+                  {singleBook.genres?.slice(0, 5).map((genre) => {
                     return (
-                      <li className="text-textColour" key={genre}>
+                      <li className="text-textColour capitalize" key={genre}>
                         {genre},{" "}
                       </li>
                     );

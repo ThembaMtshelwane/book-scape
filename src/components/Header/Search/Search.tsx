@@ -17,7 +17,16 @@ const Search = () => {
 
   const editedSearchOptionsResults: Book[] = searchOptions
     .filter((item: Book) =>
-      item.title.toLowerCase().includes(searchedItem.title.toLowerCase())
+      item.title.toLowerCase().startsWith(searchedItem.title.toLowerCase())
+    )
+    .concat(
+      searchOptions.filter(
+        (item: Book) =>
+          !item.title
+            .toLowerCase()
+            .startsWith(searchedItem.title.toLowerCase()) &&
+          item.title.toLowerCase().includes(searchedItem.title.toLowerCase())
+      )
     )
     .slice(0, 5);
 

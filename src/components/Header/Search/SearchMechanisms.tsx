@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { Book, genres } from "../../../definitions";
@@ -22,21 +22,31 @@ const SearchMechanisms = ({
   const navigate = useNavigate();
   const [selectedGenres, setSelectedGenres] = useState([]);
 
-  const handleSearchOptions = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDropdownVisible(true);
-    setSearchedItem({
-      id: "",
-      title: e.target.value,
-      authors: "",
-      description: "",
-      imageUrl: "",
-    });
-    if (e.target.value.trim() === "") {
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  // Handle debouncing of search input
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchedItem.title);
+    }, 500); // 500ms debounce time
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchedItem.title]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm.trim() !== "") {
+      handleSearchOptions(debouncedSearchTerm);
+    } else {
       setSearchOptions([]);
-      return;
     }
+  }, [debouncedSearchTerm]);
+
+  const handleSearchOptions = async (text: string) => {
+    setDropdownVisible(true);
+    const inputText = text.trim().toLocaleLowerCase();
+    console.log(inputText);
 
     try {
       // const genreQueries = selectedGenres
@@ -64,7 +74,7 @@ const SearchMechanisms = ({
       // }));
 
       const response = await fetch(
-        `https://openlibrary.org/search.json?q=${e.target.value}`
+        `https://openlibrary.org/search.json?q=${inputText}&limit=5`
       );
       const data = await response.json();
 
@@ -79,6 +89,7 @@ const SearchMechanisms = ({
           ? `https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`
           : "",
       }));
+      console.log("search options", books);
 
       setSearchOptions(books);
     } catch (error) {
@@ -115,7 +126,12 @@ const SearchMechanisms = ({
           value={searchedItem.title}
           name="searchString"
           placeholder="Search for books"
-          onChange={handleSearchOptions}
+          onChange={(e) => {
+            setSearchedItem({
+              ...searchedItem,
+              title: e.target.value,
+            });
+          }}
           required
         />
         <button className="text-white text-3xl flex  items-center justify-center hover:bg-yellowGreen hover:scale-105 rounded-tr-[inherit] rounded-br-[inherit] w-[80px]">
