@@ -12,6 +12,14 @@
   --accent-colour: #c0d960; /* yellow green*/
 }
 
+* {
+  font-size: 18px;
+}
+
+body {
+  background-color: var(--primary-colour: );
+}
+
 p,
 input {
   color: var(--secondary-colour);
