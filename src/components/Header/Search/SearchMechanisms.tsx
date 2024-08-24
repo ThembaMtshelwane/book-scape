@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { Book, genres } from "../../../definitions";
-import { LoaderFunctionArgs, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
+import { useBooks } from "../../context/BooksContext";
+import { useLatestBooks } from "../../context/LatestBooksContext";
+import { computeMatchScore } from "../../../utils";
 
 interface SearchMechanismsProps {
   searchedItem: Book;
@@ -21,8 +24,10 @@ const SearchMechanisms = ({
   const [filterToggle, setFilterToggle] = useState<boolean>(true);
   const navigate = useNavigate();
   const [selectedGenres, setSelectedGenres] = useState([]);
-
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  const { allBooks } = useBooks();
+  const { latestBooks } = useLatestBooks();
+  const books = [...latestBooks, ...allBooks];
 
   // Handle debouncing of search input
   useEffect(() => {
@@ -41,7 +46,7 @@ const SearchMechanisms = ({
     } else {
       setSearchOptions([]);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, selectedGenres]);
 
   const handleSearchOptions = async (text: string) => {
     setDropdownVisible(true);
@@ -73,25 +78,31 @@ const SearchMechanisms = ({
       //   imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
       // }));
 
-      const response = await fetch(
-        `https://openlibrary.org/search.json?q=${inputText}&limit=5`
-      );
-      const data = await response.json();
+      const filteredBooks = books
+        .filter((book) => {
+          const titleLowerCase = book.title.toLocaleLowerCase();
+          const matchesText =
+            titleLowerCase.includes(inputText) ||
+            titleLowerCase.startsWith(inputText);
 
-      const books = data.docs.map((item: any) => ({
-        id: item.key.split("/").pop() || "unknown",
-        title: item.title,
-        authors: item.author_name || [],
-        description: item.first_sentence
-          ? item.first_sentence.join(" ")
-          : "No description available",
-        imageUrl: item.cover_i
-          ? `https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`
-          : "",
-      }));
-      console.log("search options", books);
+          const matchesGenre =
+            selectedGenres.length === 0 ||
+            selectedGenres.some((genre) => book.genres?.includes(genre));
 
-      setSearchOptions(books);
+          return matchesText && matchesGenre;
+        })
+        .sort((a, b) => {
+          const aTitleLowerCase = a.title.toLocaleLowerCase();
+          const bTitleLowerCase = b.title.toLocaleLowerCase();
+
+          // Compute scores based on matches
+          const scoreA = computeMatchScore(aTitleLowerCase, inputText);
+          const scoreB = computeMatchScore(bTitleLowerCase, inputText);
+
+          return scoreB - scoreA; // Sort in descending order (higher score first)
+        });
+
+      setSearchOptions(filteredBooks.slice(0, 5));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -173,43 +184,4 @@ const SearchMechanisms = ({
   );
 };
 
-const resultsLoader = async ({ params }: LoaderFunctionArgs) => {
-  try {
-    //   `https://www.googleapis.com/books/v1/volumes?q=${params.searchString}${params.geners}&key=${
-    //     import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
-    //   }`
-    // );
-    // const data = await res.json();
-
-    // const books = data.items.map((item: any) => ({
-    //   id: item.id,
-    //   title: item.volumeInfo.title,
-    //   authors: item.volumeInfo.authors || [],
-    //   description: item.volumeInfo.description || "",
-    //   imageUrl: item.volumeInfo.imageLinks?.thumbnail || "",
-    // }));
-
-    const response = await fetch(
-      `https://openlibrary.org/search.json?q=${params.searchString}`
-    );
-    const data = await response.json();
-
-    const books: Book[] = data.docs.map((item: any) => ({
-      id: item.key.split("/").pop() || "unknown",
-      title: item.title,
-      authors: item.author_name || [],
-      description: item.first_sentence
-        ? item.first_sentence.join(" ")
-        : "No description available",
-      imageUrl: item.cover_i
-        ? `https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`
-        : "",
-    }));
-
-    return books;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
-
-export { SearchMechanisms as default, resultsLoader };
+export default SearchMechanisms;

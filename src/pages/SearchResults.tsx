@@ -1,12 +1,13 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { allBooks, Book, maxNumberOfBooksPerPage } from "../definitions";
+import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import Books from "../components/Books/Books";
 import SubHeader from "../components/SubHeader";
 import { PaginationUI } from "../components/PaginationUI";
+import { useLatestBooks } from "../components/context/LatestBooksContext";
 
 export const SearchResults = () => {
   // const results = useLoaderData() as Book[];
-  const results = allBooks;
+  const results: Book = useLatestBooks();
   const MAX_BOOKS_PER_PAGE = Math.ceil(
     results.length / maxNumberOfBooksPerPage
   );

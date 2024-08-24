@@ -3,7 +3,7 @@ import { Book } from "../../definitions";
 
 interface LatestBooksContextType {
   latestBooks: Book[];
-  loading: boolean;
+  lastestLoading: boolean;
   error: string | null;
 }
 
@@ -15,7 +15,7 @@ export const LatestBooksProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [latestBooks, setLatestBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [lastestLoading, setlastestLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
   /***********   Open Library  *********** */
@@ -52,11 +52,11 @@ export const LatestBooksProvider: React.FC<{ children: React.ReactNode }> = ({
         }));
         setLatestBooks(latestBooksArray);
 
-        setLoading(false);
+        setlastestLoading(false);
       } catch (error) {
         setError("Cannot fetch latest books");
         console.log(error);
-        setLoading(false);
+        setlastestLoading(false);
       }
     };
 
@@ -115,7 +115,7 @@ export const LatestBooksProvider: React.FC<{ children: React.ReactNode }> = ({
   // }, []);
 
   return (
-    <LatestBooksContext.Provider value={{ latestBooks, loading, error }}>
+    <LatestBooksContext.Provider value={{ latestBooks, lastestLoading, error }}>
       {children}
     </LatestBooksContext.Provider>
   );

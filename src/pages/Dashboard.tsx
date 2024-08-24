@@ -4,18 +4,18 @@ import { useLatestBooks } from "../components/context/LatestBooksContext";
 import Spinner from "../components/Spinners/Spinner";
 
 const Dashboard = () => {
-  const { latestBooks, loading } = useLatestBooks();
+  const { latestBooks, lastestLoading } = useLatestBooks();
   console.log("latestBooks", latestBooks);
 
   return (
-    <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 relative">
+    <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 ">
       <h1 className="text-3xl uppercase my-5">latest books</h1>
-      {loading ? (
+      {lastestLoading ? (
         <section>
           <p className="text-yellowGreen text-3xl md:text-5xl">
             Loading latest books...
           </p>
-          <Spinner loading={loading} />
+          <Spinner loading={lastestLoading} />
         </section>
       ) : (
         <>

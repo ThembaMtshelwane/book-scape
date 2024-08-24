@@ -3,8 +3,7 @@ import { Book } from "../../definitions";
 
 interface BooksContextType {
   allBooks: Book[];
-  latestBooks: Book[];
-  loading: boolean;
+  allLoading: boolean;
   error: string | null;
 }
 
@@ -14,8 +13,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [allBooks, setAllBooks] = useState<Book[]>([]);
-  const [latestBooks, setLatestBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [allLoading, setAllLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
   /***********   Open Library  *********** */
@@ -53,41 +51,11 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
 
         setAllBooks(allBooksArray);
 
-        const latestBooksResponse = await fetch(
-          `https://openlibrary.org/search.json?q=e&sort=new&limit=40&language=eng`
-        );
-        if (!latestBooksResponse.ok) {
-          throw new Error("Failed to fetch latest books");
-        }
-        const latestBooksData = await latestBooksResponse.json();
-        const latestBooksArray = latestBooksData.docs.map((book: any) => ({
-          id: book.key.split("/").pop() || "unknown",
-          title: book.title,
-          imageUrl: book.cover_i
-            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-            : null,
-          authors: book.author_name ? book.author_name.join(", ") : "Unknown",
-          description: book.first_sentence
-            ? book.first_sentence.join(" ")
-            : book.description
-            ? typeof book.description === "string"
-              ? book.description
-              : book.description.value
-            : book.subtitle
-            ? book.subtitle
-            : book.notes
-            ? book.notes
-            : book.excerpt
-            ? book.excerpt
-            : "No description available",
-        }));
-        setLatestBooks(latestBooksArray);
-
-        setLoading(false);
+        setAllLoading(false);
       } catch (error) {
         setError("Cannot fetch book data");
         console.log(error);
-        setLoading(false);
+        setAllLoading(false);
       }
     };
 
@@ -146,7 +114,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({
   // }, []);
 
   return (
-    <BooksContext.Provider value={{ allBooks, latestBooks, loading, error }}>
+    <BooksContext.Provider value={{ allBooks, allLoading, error }}>
       {children}
     </BooksContext.Provider>
   );

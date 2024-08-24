@@ -95,3 +95,15 @@ export const fetchBooksFromAPI = async (
   }
   return response.json();
 };
+
+export const computeMatchScore = (title: string, searchText: string) => {
+  let score = 0;
+
+  if (title.startsWith(searchText)) {
+    score += 3; // High score for exact starts with match
+  } else if (title.includes(searchText)) {
+    score += 2; // Medium score for includes match
+  }
+
+  return score;
+};
