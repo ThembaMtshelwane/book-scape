@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Book } from "../../definitions";
-import { deduplicateBooks, fetchBooksFromAPI } from "../../utils";
 
 interface BooksContextType {
   allBooks: Book[];

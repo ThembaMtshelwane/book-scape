@@ -3,6 +3,8 @@
 //   import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
 // }`;
 
+import { Book } from "./definitions";
+
 export const fetchBooksFromAPI = async (
   startIndex: number,
   maxResults: number

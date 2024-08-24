@@ -11,7 +11,7 @@ const BookCard = ({ book }: BookCardProps) => {
       <section className="border-2 border-yellowGreen w-[300px] flex flex-col max-w-[400px] h-[500px]  sm:max-w-[320px]">
         <section className=" flex items-center justify-center h-[60%] w-full overflow-hidden">
           <img
-            src={book.imageUrl}
+            src={book.imageUrl ? book.imageUrl : "/default-image.jpg"}
             alt={book.title}
             className="object-center object-cover h-full w-full"
           />

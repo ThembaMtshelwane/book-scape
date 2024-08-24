@@ -2,7 +2,6 @@ import Books from "../components/Books/Books";
 import { Book, maxNumberOfBooksPerPage } from "../definitions";
 
 import Spinner from "../components/Spinners/Spinner";
-import { useLatestBooks } from "../components/context/LatestBooksContext";
 import { PaginationUI } from "../components/PaginationUI";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

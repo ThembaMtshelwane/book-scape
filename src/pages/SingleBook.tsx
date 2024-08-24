@@ -83,7 +83,7 @@ const SingleBook = () => {
             <section className="p-3 w-[90%]  flex flex-col gap-3 sm:ml-4  sm:justify-center sm:w-[50%] sm:h-full md:w-[500px]">
               <h3 className="text-2xl">{singleBook.title}</h3>
               <p className="w-[90%] text-justify text-wrap truncate">
-                {singleBook.description}
+                {singleBook.description.substring(0, 400)}...
               </p>
               <p>
                 <span className="font-bold">By:</span>{" "}

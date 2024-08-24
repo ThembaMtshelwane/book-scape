@@ -14,7 +14,6 @@ export const SearchResults = () => {
   const { latestBooks } = useLatestBooks();
   const [loading, setLoading] = useState<boolean>(true);
   const [paginatedBooks, setPaginatedBooks] = useState<Book[]>([]);
-  const books: Book[] = deduplicateBooks([...latestBooks, ...allBooks]);
   const [maxCount, setMaxCount] = useState<number>(0);
   const { searchItem, genres, id } = useParams<{
     searchItem: string;
@@ -26,15 +25,13 @@ export const SearchResults = () => {
 
   useEffect(() => {
     if (!searchItem) return;
-
-    const inputText = searchItem.trim().toLocaleLowerCase();
     console.log("text", searchItem);
     console.log("genresArray", searchedGenres);
     console.log("pageNumber", pageNumber);
 
     const filteredBooks = () => {
       const inputText = searchItem.trim().toLowerCase();
-      return deduplicateBooks([...latestBooks, ...allBooks])
+      return allBooks
         .filter((book) => {
           const titleLowerCase = book.title.toLowerCase();
           const matchesText =
