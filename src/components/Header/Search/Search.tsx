@@ -13,6 +13,7 @@ const Search = () => {
     imageUrl: "",
   });
   const [searchOptions, setSearchOptions] = useState<Book[]>([]);
+  const [isDropdownVisible, setDropdownVisible] = useState(true);
 
   const editedSearchOptionsResults: Book[] = searchOptions
     .filter((item: Book) =>
@@ -26,6 +27,7 @@ const Search = () => {
         searchedItem={searchedItem}
         setSearchedItem={setSearchedItem}
         setSearchOptions={setSearchOptions}
+        setDropdownVisible={setDropdownVisible}
       />
       {/* <section>
         {searchedItem && (
@@ -36,12 +38,14 @@ const Search = () => {
         )}
       </section> */}
       <section className="border-2 border-red-400 relative w-full  sm:w-[80%] md:w-[90%] max-w-[750px] bg-backgroundColour">
-        {
+        {searchedItem && (
           <ShowSearchOptions
+            isDropdownVisible={isDropdownVisible}
+            setDropdownVisible={setDropdownVisible}
             searchOptions={editedSearchOptionsResults}
             setSearchedItem={setSearchedItem}
           />
-        }
+        )}
       </section>
     </section>
   );

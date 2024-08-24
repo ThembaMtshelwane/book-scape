@@ -9,12 +9,14 @@ interface SearchMechanismsProps {
   searchedItem: Book;
   setSearchedItem: (books: Book) => void;
   setSearchOptions: (books: Book[]) => void;
+  setDropdownVisible: (bool: boolean) => void;
 }
 
 const SearchMechanisms = ({
   searchedItem,
   setSearchedItem,
   setSearchOptions,
+  setDropdownVisible,
 }: SearchMechanismsProps) => {
   const [filterToggle, setFilterToggle] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const SearchMechanisms = ({
   const handleSearchOptions = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    setDropdownVisible(true);
     setSearchedItem({
       id: "",
       title: e.target.value,
