@@ -13,6 +13,11 @@
 }
 
 p,
+input {
+  color: var(--secondary-colour);
+}
+
+p,
 h3 {
   font-family: "Nunito", "sans-serif";
 }

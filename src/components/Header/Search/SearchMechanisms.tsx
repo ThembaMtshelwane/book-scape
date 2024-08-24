@@ -99,9 +99,13 @@ const SearchMechanisms = ({
   };
 
   return (
-    <form onSubmit={handleSearchItem}>
-      <section>
+    <form
+      onSubmit={handleSearchItem}
+      className="flex flex-col justify-center h-[70%] sm:w-[80%] md:w-[90%] max-w-[750px]"
+    >
+      <section className="border-2 border-yellowGreen w-full flex rounded-xl">
         <input
+          className="w-full p-5 rounded-tl-[inherit] rounded-bl-[inherit] hover:scale-[1.005]"
           type="text"
           value={searchedItem.title}
           name="searchString"
@@ -109,23 +113,26 @@ const SearchMechanisms = ({
           onChange={handleSearchOptions}
           required
         />
-        <button>
-          <IoSearch />
+        <button className="text-white text-3xl flex  items-center justify-center hover:bg-yellowGreen hover:scale-105 rounded-tr-[inherit] rounded-br-[inherit] w-[80px]">
+          <IoSearch className="" />
         </button>
       </section>
-      <section>
+      <section className="">
         {filterToggle ? (
           <CiFilter
+            className="text-white text-3xl ml-auto my-5 mr-5 hover:scale-105 hover:text-yellowGreen "
             onClick={() => setFilterToggle((prevState) => !prevState)}
           />
         ) : (
-          <section>
+          <section className="relative">
             <section>
               <IoClose
+                className="text-white text-3xl ml-auto my-5 mr-5 hover:scale-105 hover:text-yellowGreen"
                 onClick={() => setFilterToggle((prevState) => !prevState)}
               />
             </section>
             <Multiselect
+              className="text-textColour bg-backgroundColour absolute hover:scale-[1.005]"
               options={genres}
               isObject={false}
               onKeyPressFn={function noRefCheck() {}}

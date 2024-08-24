@@ -5,7 +5,7 @@ import { useState } from "react";
 const Navbar = () => {
   const [toggle, setToggle] = useState(true);
   return (
-    <nav className="flex justify-between border-2 border-green-500 p-5 items-center">
+    <nav className="flex justify-between  p-5 items-center">
       <Link
         className="border-2 border-yellowGreen rounded-[100%] w-[70px] h-[70px] flex justify-center py-2 px-4"
         to="/dashboard"
