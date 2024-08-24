@@ -4,7 +4,7 @@ import Books from "../components/Books/Books";
 import SubHeader from "../components/SubHeader";
 import { PaginationUI } from "../components/PaginationUI";
 import { useLatestBooks } from "../components/context/LatestBooksContext";
-import { computeMatchScore, deduplicateBooks } from "../utils";
+import { computeMatchScore } from "../utils";
 import { useBooks } from "../components/context/BooksContext";
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinners/Spinner";

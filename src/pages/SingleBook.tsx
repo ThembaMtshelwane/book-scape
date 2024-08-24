@@ -58,6 +58,9 @@ const SingleBook = () => {
     }
   }, [id, allBooks]);
 
+  if (error) {
+    return <>{error}</>;
+  }
   return (
     <>
       {loading ? (
