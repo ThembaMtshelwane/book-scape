@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import { useBooks } from "../../context/BooksContext";
 import { useLatestBooks } from "../../context/LatestBooksContext";
-import { computeMatchScore } from "../../../utils";
+import { computeMatchScore, deduplicateBooks } from "../../../utils";
 
 interface SearchMechanismsProps {
   searchedItem: Book;
@@ -27,7 +27,7 @@ const SearchMechanisms = ({
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const { allBooks } = useBooks();
   const { latestBooks } = useLatestBooks();
-  const books = [...latestBooks, ...allBooks];
+  const books = deduplicateBooks([...latestBooks, ...allBooks]);
 
   // Handle debouncing of search input
   useEffect(() => {
@@ -121,7 +121,7 @@ const SearchMechanisms = ({
     navigate(
       `/results/${payload.searchString}${
         genreQueries ? `/${genreQueries}` : ""
-      }`
+      }/1`
     );
   };
 

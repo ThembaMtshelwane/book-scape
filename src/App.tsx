@@ -41,7 +41,7 @@ function App() {
 
         <Route path="/results/" element={<MainLayout />}>
           <Route
-            path="/results/:searchItem/:genres?/"
+            path="/results/:searchItem/:genres?/:id"
             element={<SearchResults />}
             // loader={resultsLoader}
           />

@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 interface PaginationUIProps {
   maxPageCount: number;
+  path: string;
 }
 
-export const PaginationUI = ({ maxPageCount }: PaginationUIProps) => {
+export const PaginationUI = ({ path, maxPageCount }: PaginationUIProps) => {
   const navigate = useNavigate();
   const handleRouting = (index: number) => {
-    navigate(`/latest-books/${index}`);
+    navigate(`/${path}/${index}`);
   };
   return (
     <ul className="flex border-2 border-black my-2">

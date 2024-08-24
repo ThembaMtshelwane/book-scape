@@ -107,3 +107,15 @@ export const computeMatchScore = (title: string, searchText: string) => {
 
   return score;
 };
+
+export const deduplicateBooks = (books: Book[]): Book[] => {
+  const seenIds = new Set<string>();
+  return books.filter((book) => {
+    if (seenIds.has(book.id)) {
+      return false;
+    } else {
+      seenIds.add(book.id);
+      return true;
+    }
+  });
+};
