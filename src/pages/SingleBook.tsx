@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Book } from "../definitions";
 import SubHeader from "../components/SubHeader";
 import { useParams } from "react-router-dom";
