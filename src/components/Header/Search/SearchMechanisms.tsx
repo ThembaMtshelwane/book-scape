@@ -91,9 +91,7 @@ const SearchMechanisms = ({
       [key: string]: FormDataEntryValue;
     };
     console.log("added payload", payload);
-    const genreQueries = selectedGenres
-      .map((genre) => `subject:${genre}`)
-      .join(" OR ");
+    const genreQueries = selectedGenres.map((genre) => genre).join("&");
 
     navigate(`/books/${payload.searchString}/${genreQueries}`);
   };
@@ -132,7 +130,7 @@ const SearchMechanisms = ({
               />
             </section>
             <Multiselect
-              className="text-textColour bg-backgroundColour absolute hover:scale-[1.005]"
+              className="text-textColour bg-backgroundColour absolute hover:scale-[1.005] z-[999]"
               options={genres}
               isObject={false}
               onKeyPressFn={function noRefCheck() {}}

@@ -33,6 +33,7 @@ h3 {
 h1,
 h2 {
   font-family: "Merriweather", "serif";
+  color: var(--accent-colour);
 }
 
 @layer components {

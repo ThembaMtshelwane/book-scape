@@ -38,11 +38,11 @@ function App() {
           /> */}
         </Route>
         <Route path="/books/" element={<MainLayout />}>
-          {/* <Route
-            path="/books/:searchItem/:geners/"
+          <Route
+            path="/books/:searchItem/:genres/"
             element={<SearchResults />}
-            loader={resultsLoader}
-          /> */}
+            // loader={resultsLoader}
+          />
         </Route>
       </Route>
     )
