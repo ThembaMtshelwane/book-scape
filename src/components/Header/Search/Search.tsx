@@ -27,13 +27,21 @@ const Search = () => {
         setSearchedItem={setSearchedItem}
         setSearchOptions={setSearchOptions}
       />
-      <section>
+      {/* <section>
         {searchedItem && (
           <ShowSearchOptions
             searchOptions={editedSearchOptionsResults}
             setSearchedItem={setSearchedItem}
           />
         )}
+      </section> */}
+      <section className="border-2 border-red-400 relative w-full  sm:w-[80%] md:w-[90%] max-w-[750px] bg-backgroundColour">
+        {
+          <ShowSearchOptions
+            searchOptions={editedSearchOptionsResults}
+            setSearchedItem={setSearchedItem}
+          />
+        }
       </section>
     </section>
   );

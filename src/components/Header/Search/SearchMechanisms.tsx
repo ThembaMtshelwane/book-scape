@@ -93,7 +93,11 @@ const SearchMechanisms = ({
     console.log("added payload", payload);
     const genreQueries = selectedGenres.map((genre) => genre).join("&");
 
-    navigate(`/books/${payload.searchString}/${genreQueries}`);
+    navigate(
+      `/results/${payload.searchString}${
+        genreQueries ? `/${genreQueries}` : ""
+      }`
+    );
   };
 
   return (

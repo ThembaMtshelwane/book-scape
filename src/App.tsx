@@ -44,12 +44,16 @@ function App() {
             loader={allBooksLoader}
           /> */}
         </Route>
-        <Route path="/books/" element={<MainLayout />}>
+
+        <Route path="/results/" element={<MainLayout />}>
           <Route
-            path="/books/:searchItem/:gens/"
+            path="/results/:searchItem/:genres?/"
             element={<SearchResults />}
             // loader={resultsLoader}
           />
+        </Route>
+
+        <Route path="/books/" element={<MainLayout />}>
           <Route
             path="/books/:id"
             element={<SingleBook />}
