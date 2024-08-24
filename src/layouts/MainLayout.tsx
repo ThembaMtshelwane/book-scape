@@ -14,7 +14,7 @@ const MainLayout = () => {
       ></video>
       <Header />
       <section className="border-2 border-blue-500 bg-backgroundColour flex flex-col items-center min-h-screen h-fit md:w-[90%] lg:max-w-[1350px]  mx-auto  ">
-        {/* <Outlet /> */}
+        <Outlet />
       </section>
       <Footer />
     </section>

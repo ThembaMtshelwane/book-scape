@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer>
-      <section className="flex flex-row-reverse justify-around bg-blueGray opacity-90">
-        <ul>
+      <section className="flex flex-row-reverse justify-around bg-blueGray opacity-90 h-fit p-5 md:h-[20vh]  md:justify-between">
+        <ul className="md:flex">
           <li className="nav-item-desktop ">
             <Link className="flex justify-center py-2 px-4" to="/dashboard">
               Facebook
@@ -22,7 +22,7 @@ const Footer = () => {
           </li>
         </ul>
 
-        <ul>
+        <ul className=" md:flex">
           <li className="nav-item-desktop ">
             <Link className=" flex justify-center py-2 px-4 " to="/favourites">
               Favourites
