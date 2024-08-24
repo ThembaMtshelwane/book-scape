@@ -12,17 +12,18 @@ export const SearchResults = () => {
   }>();
   console.log(results);
   const searchedGenres = genres?.split("&");
-  console.log(searchedGenres);
+  console.log("searchedGenres", searchedGenres);
   return (
-    <section className="flex flex-col items-center my-10">
+    <section className="flex flex-col items-center justify-center my-10">
       <SubHeader subheading=" Search Results..." />
-      <section className="w-[95%] my-5">
-        <p>
-          <span className="font-bold"> Searched for:</span> {searchItem}{" "}
+      <section className="w-[95%] mb-5 p-5 border-2 border-red-500 flex flex-col sm:flex-row sm:w-[60%] sm:justify-between">
+        <p className="text-xl">
+          <span className="font-bold text-xl capitalize"> Searched for:</span>{" "}
+          <span className="font-bold text-xl capitalize">{searchItem}</span>
         </p>
         <section className="flex">
-          <p>
-            <span className="font-bold mr-2">Genres:</span>
+          <p className="text-xl">
+            <span className="font-bold mr-2 text-xl">Genres:</span>
           </p>
 
           <ul className="flex">

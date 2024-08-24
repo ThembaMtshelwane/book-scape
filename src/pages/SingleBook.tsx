@@ -15,9 +15,9 @@ const SingleBook = () => {
   //   setSingleBook(data);
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center  h-full">
       <SubHeader subheading={singleBook.title} />
-      <section className="max-h-screen flex flex-col my-5 items-center sm:flex-row sm:items-center">
+      <section className="flex flex-col my-5 items-center sm:flex-row sm:items-center border-2 border-yellowGreen">
         <img
           src={singleBook.imageUrl}
           alt=""
@@ -27,13 +27,25 @@ const SingleBook = () => {
         <section className="p-3 w-[90%]  flex flex-col gap-3 sm:ml-4  sm:justify-center sm:w-[50%] sm:h-full md:w-[500px]">
           <h3 className="text-2xl">{singleBook.title}</h3>
           <p>{singleBook.description}</p>
-          <p>By: {singleBook.authors}</p>
-          <p>Published: {singleBook.publishedDate}</p>
+          <p>
+            <span className="font-bold">By:</span>{" "}
+            <span> {singleBook.authors}</span>
+          </p>
+          <p>
+            <span className="font-bold">Published:</span>{" "}
+            <span> {singleBook.publishedDate}</span>
+          </p>
           <section>
-            <p>Genres:</p>
+            <p>
+              <span className="font-bold">Genres:</span>
+            </p>
             <ul className="flex">
               {singleBook.genres?.map((genre) => {
-                return <li key={genre}>{genre}, </li>;
+                return (
+                  <li className="text-textColour" key={genre}>
+                    {genre},{" "}
+                  </li>
+                );
               })}
             </ul>
           </section>
