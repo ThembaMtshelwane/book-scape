@@ -115,7 +115,7 @@ const SearchMechanisms = ({
           <IoSearch className="" />
         </button>
       </section>
-      <section className="">
+      <section className=" ">
         {filterToggle ? (
           <CiFilter
             className="text-white text-3xl ml-auto my-5 mr-5 hover:scale-105 hover:text-yellowGreen "
@@ -130,7 +130,7 @@ const SearchMechanisms = ({
               />
             </section>
             <Multiselect
-              className="text-textColour bg-backgroundColour absolute hover:scale-[1.005] z-[999]"
+              className="text-textColour bg-backgroundColour hover:scale-[1.005] "
               options={genres}
               isObject={false}
               onKeyPressFn={function noRefCheck() {}}

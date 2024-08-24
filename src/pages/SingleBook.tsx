@@ -33,7 +33,7 @@ const SingleBook = () => {
             <p>Genres:</p>
             <ul className="flex">
               {singleBook.genres?.map((genre) => {
-                return <li>{genre}, </li>;
+                return <li key={genre}>{genre}, </li>;
               })}
             </ul>
           </section>

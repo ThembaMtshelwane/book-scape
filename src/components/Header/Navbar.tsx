@@ -11,7 +11,7 @@ const Navbar = () => {
         to="/dashboard"
       >
         <img
-          src="logo.jpg"
+          src="/logo.jpg"
           alt=""
           className="object-cover object-centerborder-2 border-yellowGreen rounded-[100%] w-[90px] h-[90px] "
         />

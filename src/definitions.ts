@@ -42,7 +42,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "/login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "2",
@@ -53,7 +53,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "3",
@@ -63,7 +63,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "4",
@@ -73,7 +73,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "",
@@ -83,7 +83,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "",
@@ -93,7 +93,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "",
@@ -103,7 +103,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "",
@@ -113,7 +113,7 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
   {
     id: "",
@@ -123,6 +123,6 @@ export const allBooks = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto amet ut excepturi nulla iure omnis!",
     imageUrl: "login.jpg",
     publishedDate: "",
-    genres: ["lorem", "lorem", "lorem"],
+    genres: ["lorem1", "lorem2", "lorem3"],
   },
 ];
