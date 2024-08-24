@@ -2,7 +2,7 @@ import SubHeader from "../components/SubHeader";
 
 const About = () => {
   return (
-    <section className="flex flex-col items-center h-full">
+    <section className="flex flex-col items-center h-full my-10">
       <SubHeader subheading="About Us" />
       <section className="flex flex-col my-5 items-center sm:flex-row sm:items-center border-2 border-yellowGreen">
         <img
