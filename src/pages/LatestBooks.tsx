@@ -6,9 +6,11 @@ import { useLatestBooks } from "../components/context/LatestBooksContext";
 import { PaginationUI } from "../components/PaginationUI";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useBooks } from "../components/context/BooksContext";
 
 const LatestBooks = () => {
-  const { latestBooks, loading } = useLatestBooks();
+  const { allBooks, allLoading } = useBooks();
+  const latestBooks = allBooks;
   const { id } = useParams<{ id: string }>();
   const [paginatedBooks, setPaginatedBooks] = useState<Book[]>([]);
   const pageNumber = Number(id);
@@ -36,16 +38,16 @@ const LatestBooks = () => {
   return (
     <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 relative">
       <h1 className="text-3xl uppercase my-5">latest books</h1>
-      {loading ? (
+      {allLoading ? (
         <section>
           <p className="text-yellowGreen text-3xl md:text-5xl">
             Loading latest books...
           </p>
-          <Spinner loading={loading} />
+          <Spinner loading={allLoading} />
         </section>
       ) : (
         <>
-          <PaginationUI maxPageCount={MAX_PAGE_COUNT} />
+          <PaginationUI maxPageCount={MAX_PAGE_COUNT} path={"latest-books"} />
           <Books books={paginatedBooks} />
         </>
       )}

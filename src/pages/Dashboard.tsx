@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import Books from "../components/Books/Books";
 import { useLatestBooks } from "../components/context/LatestBooksContext";
 import Spinner from "../components/Spinners/Spinner";
+import { useBooks } from "../components/context/BooksContext";
 
 const Dashboard = () => {
-  const { latestBooks, lastestLoading } = useLatestBooks();
+  const { lastestLoading } = useLatestBooks();
+  const { allBooks } = useBooks();
+  const latestBooks = allBooks.slice(0.8);
   console.log("latestBooks", latestBooks);
 
   return (
