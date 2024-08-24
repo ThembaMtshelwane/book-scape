@@ -1,27 +1,55 @@
-import { useLoaderData } from "react-router-dom";
 import Books from "../components/Books/Books";
 import { Book, maxNumberOfBooksPerPage } from "../definitions";
-import { useBooks } from "../components/context/BooksContext";
-import { PaginationUI } from "../components/Pagination";
+
+import Spinner from "../components/Spinners/Spinner";
+import { useLatestBooks } from "../components/context/LatestBooksContext";
+import { PaginationUI } from "../components/PaginationUI";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const LatestBooks = () => {
-  // const latestBooks = useLoaderData() as Book[];
+  const { latestBooks, loading } = useLatestBooks();
+  const { id } = useParams<{ id: string }>();
+  const [paginatedBooks, setPaginatedBooks] = useState<Book[]>([]);
+  const pageNumber = Number(id);
+  const MAX_PAGE_COUNT = Math.ceil(
+    latestBooks.length / maxNumberOfBooksPerPage
+  );
 
-  const { allBooks, loading, error } = useBooks();
-  console.log("allBooks", allBooks);
+  // Debugging logs
+  console.log("latestBooks", latestBooks);
+  console.log("pageNumber", pageNumber);
+  console.log("MAX_PAGE_COUNT", MAX_PAGE_COUNT);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  useEffect(() => {
+    const validPageNumber = Math.max(1, Math.min(pageNumber, MAX_PAGE_COUNT));
+    const startIndex = (validPageNumber - 1) * maxNumberOfBooksPerPage;
+    const endIndex = Math.min(
+      startIndex + maxNumberOfBooksPerPage,
+      latestBooks.length
+    );
 
-  // const MAX_PAGE_COUNT = latestBooks.length / maxNumberOfBooksPerPage; // = 400/20
-  const MAX_PAGE_COUNT2 = Math.ceil(allBooks.length / maxNumberOfBooksPerPage); // = 400/20
+    console.log("sliced", latestBooks.slice(startIndex, endIndex));
+    setPaginatedBooks(latestBooks.slice(startIndex, endIndex));
+  }, [latestBooks, pageNumber, MAX_PAGE_COUNT]);
 
   return (
-    <>
+    <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 relative">
       <h1 className="text-3xl uppercase my-5">latest books</h1>
-      <PaginationUI maxPageCount={MAX_PAGE_COUNT2} />
-      <Books books={allBooks} />
-    </>
+      {loading ? (
+        <section>
+          <p className="text-yellowGreen text-3xl md:text-5xl">
+            Loading latest books...
+          </p>
+          <Spinner loading={loading} />
+        </section>
+      ) : (
+        <>
+          <PaginationUI maxPageCount={MAX_PAGE_COUNT} />
+          <Books books={paginatedBooks} />
+        </>
+      )}
+    </section>
   );
 };
 

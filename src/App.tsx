@@ -36,11 +36,7 @@ function App() {
           <Route index element={<Dashboard />} />
         </Route>
         <Route path="/latest-books/:id" element={<MainLayout />}>
-          {/* <Route
-            path="/latest-books/:id"
-            element={<LatestBooks />}
-            loader={allBooksLoader}
-          /> */}
+          <Route path="/latest-books/:id" element={<LatestBooks />} />
         </Route>
 
         <Route path="/results/" element={<MainLayout />}>
