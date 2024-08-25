@@ -27,7 +27,12 @@ During the development of BookScape, I gained experience with:
 
 - **Authentication**: Adding user authentication to manage user accounts and preferences.
 - **Bookshelf Features**: Implementing features that allow users to add books to personalized bookshelves, including categories like Favorites, Read, and Reading lists.
-- **Bookshelf Features**: UI layouts
+- **UI**: UI layouts, making them consistent.
+- **API Limit**: Use and API with more/unlimited calls per day or maybe have a 24hr countdown timer.
+
+## Limitations
+
+- **Google Books API**: This API allows for 1000 fetches per 24 hours so do not be alarmed if there is no data available.
 
 ## Live Site
 
