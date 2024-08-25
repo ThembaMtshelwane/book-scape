@@ -3,7 +3,7 @@ import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import Books from "../components/Books/Books";
 import SubHeader from "../components/SubHeader";
 import { PaginationUI } from "../components/PaginationUI";
-import filterAndSortBooks, { computeMatchScore } from "../utils";
+import filterAndSortBooks from "../utils";
 import { useBooks } from "../components/context/BooksContext";
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinners/Spinner";
