@@ -43,6 +43,27 @@ You can explore BookScape live at: [BookScape](https://book-scape-nine.vercel.ap
 To get a local copy of the project running, follow these steps:
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/yourusername/bookscape.git
    ```
+
+2. **Navigate to the project directory**:
+
+```bash
+cd bookscape
+```
+
+3. **Install dependencies:**:
+
+```bash
+npm install
+```
+
+2. \*Run the development server:\*\*:
+
+```bash
+npm run dev
+```
+
+The application should now be running on [http://localhost:3000](http://localhost:3000) .
