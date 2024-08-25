@@ -15,8 +15,6 @@ import { BooksProvider } from "./components/context/BooksContext";
 import SingleBook from "./pages/SingleBook";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import { SearchResultsProvider } from "./components/context/SearchResultsContext";
-import { LatestBooksProvider } from "./components/context/LatestBooksContext";
 
 function App() {
   const router = createBrowserRouter(
@@ -54,11 +52,7 @@ function App() {
   ); //
   return (
     <BooksProvider>
-      <SearchResultsProvider>
-        <LatestBooksProvider>
-          <RouterProvider router={router} />
-        </LatestBooksProvider>
-      </SearchResultsProvider>
+      <RouterProvider router={router} />
     </BooksProvider>
   );
 }

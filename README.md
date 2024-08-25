@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# BookScape
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[BookScape](https://book-scape-nine.vercel.app/) is a dynamic book discovery and management website designed to enhance the book browsing experience. With a clean and intuitive interface, users can explore the latest book releases, search for specific books, and filter results by genre.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dashboard**: Displays the latest books, providing users with a quick overview of recent releases.
+- **Latest Books Page**: Showcases additional recent book releases for those looking for the most current additions to the book market.
+- **Search and Filter**: Enables users to search for books by name and filter results by genre using the Google Books API.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: For building the user interface.
+- **TypeScript**: For type safety and improved development experience.
+- **Vite**: For fast and efficient development and build process.
+- **Tailwind CSS**: For styling and responsive design.
+- **Google Books API**: For fetching book data.
 
-- Configure the top-level `parserOptions` property like this:
+## Learnings
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+During the development of BookScape, I gained experience with:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **APIs**: Understanding how to integrate and use the Google Books API effectively.
+- **React Context APIs**: Managing global state and sharing data across components.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Future Improvements
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Authentication**: Adding user authentication to manage user accounts and preferences.
+- **Bookshelf Features**: Implementing features that allow users to add books to personalized bookshelves, including categories like Favorites, Read, and Reading lists.
+- **Bookshelf Features**: UI layouts
+
+## Live Site
+
+You can explore BookScape live at: [BookScape](https://book-scape-nine.vercel.app/)
+
+## Insights
+
+- **Cards**: Improve on implementing cards.
+- **Layouts**: Improve on structuring consistent layouts, with or without data.
+
+## Getting Started
+
+To get a local copy of the project running, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/bookscape.git
+   ```

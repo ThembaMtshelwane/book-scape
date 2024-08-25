@@ -5,8 +5,7 @@ import { Book, genres } from "../../../definitions";
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import { useBooks } from "../../context/BooksContext";
-import { useLatestBooks } from "../../context/LatestBooksContext";
-import { computeMatchScore, deduplicateBooks } from "../../../utils";
+import filterAndSortBooks from "../../../utils";
 
 interface SearchMechanismsProps {
   searchedItem: Book;
@@ -24,11 +23,9 @@ const SearchMechanisms = ({
   const MAX_NUMBER_OF_OPTIONS = 5;
   const [filterToggle, setFilterToggle] = useState<boolean>(true);
   const navigate = useNavigate();
-  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const { allBooks } = useBooks();
-  const { latestBooks } = useLatestBooks();
-  const books = deduplicateBooks([...latestBooks, ...allBooks]);
 
   // Handle debouncing of search input
   useEffect(() => {
@@ -55,29 +52,10 @@ const SearchMechanisms = ({
     console.log(inputText);
 
     try {
-      const filteredBooks = books
-        .filter((book) => {
-          const titleLowerCase = book.title.toLocaleLowerCase();
-          const matchesText =
-            titleLowerCase.includes(inputText) ||
-            titleLowerCase.startsWith(inputText);
-
-          const matchesGenre =
-            selectedGenres.length === 0 ||
-            selectedGenres.some((genre) => book.genres?.includes(genre));
-
-          return matchesText && matchesGenre;
-        })
-        .sort((a, b) => {
-          const aTitleLowerCase = a.title.toLocaleLowerCase();
-          const bTitleLowerCase = b.title.toLocaleLowerCase();
-
-          // Compute scores based on matches
-          const scoreA = computeMatchScore(aTitleLowerCase, inputText);
-          const scoreB = computeMatchScore(bTitleLowerCase, inputText);
-
-          return scoreB - scoreA; // Sort in descending order (higher score first)
-        });
+      const filteredBooks = filterAndSortBooks(allBooks, {
+        inputText,
+        selectedGenres,
+      });
 
       setSearchOptions(filteredBooks.slice(0, MAX_NUMBER_OF_OPTIONS));
     } catch (error) {

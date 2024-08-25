@@ -3,15 +3,13 @@ import { Book, maxNumberOfBooksPerPage } from "../definitions";
 import Books from "../components/Books/Books";
 import SubHeader from "../components/SubHeader";
 import { PaginationUI } from "../components/PaginationUI";
-import { useLatestBooks } from "../components/context/LatestBooksContext";
-import { computeMatchScore } from "../utils";
+import filterAndSortBooks, { computeMatchScore } from "../utils";
 import { useBooks } from "../components/context/BooksContext";
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinners/Spinner";
 
 export const SearchResults = () => {
   const { allBooks } = useBooks();
-  const { latestBooks } = useLatestBooks();
   const [loading, setLoading] = useState<boolean>(true);
   const [paginatedBooks, setPaginatedBooks] = useState<Book[]>([]);
   const [maxCount, setMaxCount] = useState<number>(0);
@@ -29,31 +27,11 @@ export const SearchResults = () => {
     console.log("genresArray", searchedGenres);
     console.log("pageNumber", pageNumber);
 
-    const filteredBooks = () => {
-      const inputText = searchItem.trim().toLowerCase();
-      return allBooks
-        .filter((book) => {
-          const titleLowerCase = book.title.toLowerCase();
-          const matchesText =
-            titleLowerCase.includes(inputText) ||
-            titleLowerCase.startsWith(inputText);
-
-          const matchesGenre =
-            searchedGenres.length === 0 ||
-            searchedGenres.some((genre) => book.genres?.includes(genre));
-
-          return matchesText && matchesGenre;
-        })
-        .sort((a, b) => {
-          const scoreA = computeMatchScore(a.title.toLowerCase(), inputText);
-          const scoreB = computeMatchScore(b.title.toLowerCase(), inputText);
-
-          return scoreB - scoreA;
-        });
-    };
-
     setLoading(true);
-    const filteredBooksResult = filteredBooks();
+    const filteredBooksResult = filterAndSortBooks(allBooks, {
+      inputText: searchItem,
+      selectedGenres: searchedGenres,
+    });
     setMaxCount(
       Math.ceil(filteredBooksResult.length / maxNumberOfBooksPerPage)
     );
@@ -66,7 +44,7 @@ export const SearchResults = () => {
 
     setPaginatedBooks(filteredBooksResult.slice(startIndex, endIndex));
     setLoading(false);
-  }, [searchItem, genres, id, allBooks, latestBooks]);
+  }, [searchItem, genres, id, allBooks]);
 
   return (
     <section className="flex flex-col items-center justify-center my-10">
