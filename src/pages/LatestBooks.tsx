@@ -42,7 +42,7 @@ const LatestBooks = () => {
   }
 
   return (
-    <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 relative">
+    <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 relative gap-10">
       <h1 className="text-3xl uppercase my-5">latest books</h1>
       {allLoading ? (
         <section>

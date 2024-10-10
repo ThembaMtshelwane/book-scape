@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        1111: "repeat(auto-fit, minmax(17.8rem,1fr))",
+      },
       fontFamily: {
         primary: ["Nunito", "sans-serif"],
         secondary: ["Merriweather", "serif"],

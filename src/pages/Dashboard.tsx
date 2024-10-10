@@ -9,17 +9,19 @@ const Dashboard = () => {
   console.log("latestBooks", latestBooks);
 
   return (
-    <section className="border-2 w-full min-h-screen flex flex-col items-center py-10 ">
-      <h1 className="text-3xl uppercase my-5">latest books</h1>
+    <section className="min-h-screen flex items-center justify-center">
       {allLoading ? (
-        <section>
-          <p className="text-yellowGreen text-3xl md:text-5xl">
+        <section className="border-2">
+          <p className="text-yellowGreen text-3xl md:text-5xl mb-10">
             Loading latest books...
           </p>
           <Spinner loading={allLoading} />
         </section>
       ) : (
-        <>
+        <section className="min-h-screen grid grid-rows-[4fr_minmax(80vh,_auto)_1fr]">
+          <h1 className="text-4xl md:text-6xl uppercase my-5 place-content-center text-center">
+            latest books
+          </h1>
           <Books books={latestBooks.slice(0, 8)} />
           <Link
             to="/latest-books/1"
@@ -30,7 +32,7 @@ const Dashboard = () => {
           >
             More
           </Link>
-        </>
+        </section>
       )}
     </section>
   );

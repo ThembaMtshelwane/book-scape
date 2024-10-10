@@ -9,11 +9,13 @@ interface PaginationUIProps {
 export const PaginationUI = ({ path, maxPageCount }: PaginationUIProps) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+
   const handleRouting = (index: number) => {
     setCurrentPage(index);
     navigate(`/${path}/${index}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   const getPageNumbers = () => {
     const pages = [];
     let startPage = Math.max(1, currentPage - 2);
